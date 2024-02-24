@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Drum Kit</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Arvo"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1 id="title">Drum 🥁 Kit</h1>
+    <div class="set">
+      <button class="w drum">w</button>
+      <button class="a drum">a</button>
+      <button class="s drum">s</button>
+      <button class="d drum">d</button>
+      <button class="j drum">j</button>
+      <button class="k drum">k</button>
+      <button class="l drum">l</button>
+    </div>
+    <footer>Made with ❤️ in Kyiv.</footer>
+    <script src="script.js"></script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyDnKNq_ytekYvTOLlg0OqdJmWBTBRQp5GE",
+        authDomain: "web-drums.firebaseapp.com",
+        projectId: "web-drums",
+        storageBucket: "web-drums.appspot.com",
+        messagingSenderId: "716025637305",
+        appId: "1:716025637305:web:5729c004d4564f6a976e68",
+        measurementId: "G-XB83Y3QC6B",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+  </body>
+</html>
