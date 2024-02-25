@@ -1,5 +1,4 @@
 import { RootState } from "@/app/rootReducer.tsx";
-import AlertModal from "@/features/alert/AlerModal.tsx";
 import { AnimatePresence } from "framer-motion";
 import { useSelector } from "react-redux";
 import Form from "../form/Form.tsx";
@@ -14,11 +13,12 @@ const User = () => {
   return (
     <>
       <UserAvatar />
-      <div className="fixed left-1/2 top-20 z-[999] -translate-x-1/2">
-        <AlertModal />
-      </div>
+
       <AnimatePresence>
-        {openUserPanel && signedIn ? <UserPannel /> : openForm && <Form />}
+        {openUserPanel && signedIn 
+          ? <UserPannel /> 
+          : openForm && <Form />
+        }
       </AnimatePresence>
     </>
   );

@@ -87,6 +87,7 @@ const Form = () => {
                   <span className="absolute -top-6 text-sm opacity-60">
                     Name
                   </span>
+
                   <Input
                     {...register("name")}
                     type="text"
@@ -97,15 +98,18 @@ const Form = () => {
                       errors.name ? "border-red-600" : "border-neutral",
                     )}
                   />
+
                   {errors.name && (
                     <p className="absolute top-11 text-red-600">{`${errors.name.message}`}</p>
                   )}
                 </label>
               )}
+
               <label htmlFor="email" className="relative">
                 <span className="absolute -top-6 text-sm opacity-60">
                   Email
                 </span>
+
                 <Input
                   {...register("email")}
                   type="text"
@@ -116,14 +120,17 @@ const Form = () => {
                     errors.email ? "border-red-600" : "border-neutral",
                   )}
                 />
+
                 {errors.email && (
                   <p className="absolute top-11 text-red-600">{`${errors.email.message}`}</p>
                 )}
               </label>
+
               <label htmlFor="password" className="relative">
                 <span className="absolute -top-6 text-sm opacity-60">
                   Password
                 </span>
+
                 <Input
                   {...register("password")}
                   type={`${showPassword ? "text" : "password"}`}
@@ -146,6 +153,7 @@ const Form = () => {
                 >
                   {showPasswordIcon}
                 </span>
+
                 {errors.password && (
                   <p className="absolute top-11 text-red-600">{`${errors.password.message}`}</p>
                 )}
@@ -158,6 +166,7 @@ const Form = () => {
               </Button>
             </div>
           </div>
+
           <SignGoogle dispatch={dispatch} />
         </form>
       </div>

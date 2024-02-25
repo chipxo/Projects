@@ -1,9 +1,7 @@
 import { RootState } from "@/app/rootReducer";
-import { useAppDispatch } from "@/app/store";
-import { setAmount } from "@/features/amount/amountSlice";
 import { mFLoatMenu } from "@/utils/motionSettings";
 import { AnimatePresence, motion as m } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import CartListItem from "./CartListItem";
 import CartListSkeleton from "./CartListSkeleton";
@@ -21,17 +19,11 @@ type ShoppingCartItemProps = {
 const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
   isBurger = false,
 }) => {
-  const dispatch = useAppDispatch();
-
   const { amount } = useSelector((state: RootState) => state.amount);
 
   const [open, setOpen] = useState(false);
 
   const addedProducts = useLiveQuery(() => db.addedProducts.toArray());
-
-  useEffect(() => {
-    dispatch(setAmount(addedProducts?.length as number));
-  }, [dispatch, addedProducts]);
 
   return (
     <div
@@ -41,6 +33,7 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
       onClick={() => setOpen(!open)}
     >
       <AmountBadge />
+
       <AnimatePresence>
         {open && !isBurger && amount ? (
           <m.div
@@ -49,6 +42,7 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
             className="absolute -left-1/2 top-12"
           >
             <div className="absolute -top-5 h-8 w-full bg-transparent" />
+
             <div className="grid max-h-[44vh] w-max cursor-pointer gap-y-4 overflow-auto rounded-md border bg-background p-4 max-sm:max-w-[80vw]">
               <ToShoppingCart onClick={() => setOpen(false)} />
 

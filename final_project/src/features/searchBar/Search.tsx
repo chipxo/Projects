@@ -80,6 +80,7 @@ const Search = () => {
               className="fixed inset-0 z-[99] h-screen w-screen bg-black/40"
               onClick={() => setOpen(false)}
             />
+
             <m.div
               {...mOpacity}
               style={{ x: "-50%" }}

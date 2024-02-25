@@ -13,10 +13,14 @@ const BurgerBar = () => {
   return (
     <>
       <Burger />
+
       <AnimatePresence>
         {openUserPanel && <UserPannel isBurger />}
       </AnimatePresence>
-      <AnimatePresence>{openForm && <Form />}</AnimatePresence>
+
+      <AnimatePresence>
+        {openForm && <Form />}
+      </AnimatePresence>
     </>
   );
 };

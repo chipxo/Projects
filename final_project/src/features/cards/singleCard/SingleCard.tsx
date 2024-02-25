@@ -42,9 +42,13 @@ const SingleCard: React.FC<SingleCardType> = ({
     window.scrollTo(0, 0);
 
     const checkItem = async () => {
-      const item = await getItem(Number(prodId) || id);
+      try {
+        const item = await getItem(Number(prodId) || id);
 
-      setChecked(item);
+        setChecked(item);
+      } catch (e) {
+        console.log(`Error in useEffect: ${e}`);
+      }
     };
 
     checkItem();
@@ -56,17 +60,25 @@ const SingleCard: React.FC<SingleCardType> = ({
     price: number,
     image: string,
   ) => {
-    dispatch(addAmount());
-    setChecked(true);
+    try {
+      dispatch(addAmount());
+      setChecked(true);
 
-    await addProduct({ id, title, price, image });
+      await addProduct({ id, title, price, image });
+    } catch (e) {
+      console.log(`Error in handleAddBtn: ${e}`);
+    }
   };
 
   const handleDelBtn = async (id: number) => {
-    dispatch(decreaseAmount());
-    setChecked(false);
+    try {
+      dispatch(decreaseAmount());
+      setChecked(false);
 
-    await deleteProduct(id);
+      await deleteProduct(id);
+    } catch (e) {
+      console.log(`Error in handleDelBtn: ${e}`);
+    }
   };
 
   return (
@@ -98,20 +110,25 @@ const SingleCard: React.FC<SingleCardType> = ({
           alt={title}
         />
       </CardHeader>
+
       <div className="grid">
         <CardHeader>
           <Badge variant="secondary" className="mb-3 w-fit">
             {category?.name}
           </Badge>
+
           <CardTitle>{title}</CardTitle>
+
           <CardDescription>{description}</CardDescription>
         </CardHeader>
+
         <CardContent className="mt-auto">
           <div>
             Price: <br />
             <p className="mt-2 text-3xl text-primary">{price}$</p>
           </div>
         </CardContent>
+
         <CardFooter className="self-end">
           <Button
             variant="outline"
@@ -121,6 +138,7 @@ const SingleCard: React.FC<SingleCardType> = ({
           >
             {cartIcon}
           </Button>
+
           <Button disabled={!checked} onClick={() => handleDelBtn(id)}>
             {cartDelete}
           </Button>

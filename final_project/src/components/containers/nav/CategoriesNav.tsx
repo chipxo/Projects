@@ -24,6 +24,7 @@ const CategoriesNav: React.FC<CategoriesProps> = ({ categories }) => {
           Categories
         </h2>
       </Button>
+
       <AnimatePresence>
         {open && (
           <m.div
@@ -32,6 +33,7 @@ const CategoriesNav: React.FC<CategoriesProps> = ({ categories }) => {
             className="absolute left-1/2 top-10 rounded-md border bg-background"
           >
             <div className="absolute -top-3 z-[9999] h-4 w-full bg-transparent" />
+
             <div className="grid max-h-[60vh] cursor-pointer gap-y-4 overflow-auto rounded-md p-4">
               <div className="text-md grid gap-y-4 font-Merriweather">
                 {categories?.map(({ id, name }) => (

@@ -83,8 +83,8 @@ module.exports = {
         filterLayout: "repeat(auto-fill, minmax(200px, 1fr))",
       },
       fontFamily: {
-        Merriweather: ["'Merriweather', 'Roboto Condensed', sans-serif"],
-        "Roboto-Condensed": ["'Roboto Condensed', 'Merriweather', sans-serif"],
+        Montserrat: ["'Montserrat', 'Raleway', sans-serif"],
+        Raleway: ["'Raleway', 'Montserrat', sans-serif"],
       },
       backgroundImage: {
         "header-bg": "url('@/assets/headerBg.svg')",

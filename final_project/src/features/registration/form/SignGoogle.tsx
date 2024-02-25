@@ -19,6 +19,7 @@ const SignGoogle: React.FC<SignGoogleProps> = ({ dispatch }) => {
       <p className="absolute -left-3.5 top-1/2 -translate-y-1/2 cursor-default bg-background p-2 max-sm:hidden">
         or
       </p>
+
       <Button
         className="w-full gap-4"
         variant="ghost"

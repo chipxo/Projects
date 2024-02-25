@@ -30,7 +30,9 @@ const UserPannel: React.FC<UserPanelProps> = ({ isBurger = false }) => {
         className="relative space-y-4 justify-self-end border-l bg-background bg-user-panel bg-cover bg-center bg-no-repeat p-4 max-sm:w-[72vw] md:w-[40vw] md:p-6 lg:w-[34vw]"
       >
         <UserNav />
+
         {signedIn && <PanelContent />}
+
         {isBurger && (
           <>
             {!signedIn && (
@@ -38,9 +40,12 @@ const UserPannel: React.FC<UserPanelProps> = ({ isBurger = false }) => {
                 <h2 className="max-sm:text-md ml-6 text-end">
                   Sign in or register to acces private cabinet
                 </h2>
+
                 <div className="border-neutral grid gap-x-6 gap-y-1 border-t pt-4 sm:grid-cols-[1fr_0.1fr_1fr]">
                   <BtnRegisSign text="Sign in" signIn />
+
                   <h2 className="place-self-center max-sm:text-sm">or</h2>
+
                   <BtnRegisSign text="Register" />
                 </div>
               </div>

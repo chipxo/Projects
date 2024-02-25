@@ -50,7 +50,9 @@ const Home = () => {
   return (
     <>
       {loading && <HomeLoading />}
+
       {error && <ErrorMessage error={error} />}
+
       {!loading && !error && allProducts && <Carousel products={allProducts} />}
 
       <section>
@@ -60,27 +62,29 @@ const Home = () => {
               <CategoriesLayout />
             </div>
           )}
+
           <div className="border-neutral space-y-10 py-10 max-lg:container">
             {!loading && (
               <h2 className="text-start text-xl md:text-2xl md:font-semibold">
                 Best selling products:
               </h2>
             )}
+
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-home">
               {!loading &&
                 !error &&
                 firstPrs?.map((product) => (
-                  <div key={nanoid()} className="h-full w-full">
-                    <CommonCard {...product} isHome />
-                  </div>
+                  <CommonCard key={nanoid()} {...product} isHome />
                 ))}
+
               {open &&
                 secondPrs?.map((product) => (
-                  <m.div {...mOpacity} key={nanoid()} className="h-full w-full">
+                  <m.div {...mOpacity} key={nanoid()}>
                     <CommonCard {...product} isHome />
                   </m.div>
                 ))}
             </div>
+
             <div className="mx-auto w-fit">
               {!loading && !open && (
                 <Button onClick={() => setOpen(true)}>Show more</Button>

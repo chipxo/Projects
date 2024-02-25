@@ -16,6 +16,7 @@ const SearchResults = () => {
   return (
     <section className="min-h-[70vh] border-y">
       {error && <ErrorMessage error={error} />}
+
       {inputValue && products && products?.length > 0 ? (
         <div className="container py-6 md:py-12">
           {!loading && !error && (
@@ -23,6 +24,7 @@ const SearchResults = () => {
               Results for: "{inputValue}"
             </h2>
           )}
+
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-home">
             {loading &&
               "qwerty".split("").map((char) => <CardSkeleton key={char} />)}

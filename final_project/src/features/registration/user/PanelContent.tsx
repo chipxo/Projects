@@ -40,10 +40,12 @@ const PanelContent = () => {
   return (
     <div className="grid w-full gap-y-4 text-end">
       <PanelTitle />
+
       <div className="grid w-full gap-x-3 border-t pt-6 max-sm:gap-y-3 sm:grid-cols-2 md:gap-x-6 lg:gap-x-12">
         <Button onClick={handleSignOut} variant="outline">
           Sign out
         </Button>
+
         <Button onClick={() => setOpen(!open)} variant="default">
           Delete account
         </Button>
@@ -55,10 +57,12 @@ const PanelContent = () => {
               className="mt-5 text-center text-lg sm:col-span-2"
             >
               <h2>Are you sure?</h2>
+
               <div className="mt-4 grid grid-cols-2 gap-x-16">
                 <Button onClick={handleDeleteAcc} variant="default">
                   Yes
                 </Button>
+
                 <Button onClick={() => setOpen(!open)} variant="outline">
                   No
                 </Button>

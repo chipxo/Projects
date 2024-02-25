@@ -62,22 +62,22 @@ h2,
 h3,
 button,
 a {
-  @apply font-Merriweather;
+  @apply font-Montserrat;
 }
 
 h2,
 h3 {
-  @apply text-lg;
+  @apply text-lg lg:text-xl;
 }
 
 p,
 span,
 input {
-  @apply font-Roboto-Condensed;
+  @apply font-Raleway;
 }
 
 img {
-  @apply text-center font-Merriweather;
+  @apply font-Montserrat text-center;
 }
 
 .slick-arrow.slick-prev,

@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label.tsx";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group.tsx";
 import { ProductType } from "@/types/types";
 import { forwardRef } from "react";
+import { checkBoxesName } from "./checkBoxesList";
 
 type ClickType = {
   onClick: () => void;
@@ -35,30 +36,28 @@ const ByName = forwardRef<HTMLButtonElement, ClickType>(({ onClick }, ref) => {
       dispatch(setCategoryProducts(sortedProducts as ProductType[]));
     }
   };
+
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value="item-3">
         <AccordionTrigger ref={ref} onClick={onClick}>
           By name
         </AccordionTrigger>
+
         <AccordionContent className="px-2 py-2">
-          <RadioGroup defaultValue="">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem
-                value="default"
-                id="r3"
-                onClick={() => filterByName(true)}
-              />
-              <Label htmlFor="r3">A - Z</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem
-                value="compact"
-                id="r4"
-                onClick={() => filterByName(false)}
-              />
-              <Label htmlFor="r4">Z - A</Label>
-            </div>
+          <RadioGroup>
+            {checkBoxesName.map(({ id, value, filter, text }) => (
+              <div key={id} className="flex items-center space-x-2">
+                <RadioGroupItem
+                  id={id}
+                  value={value}
+                  onClick={() => filterByName(filter)}
+                />
+                <Label htmlFor="r3" className="cursor-pointer">
+                  {text}
+                </Label>
+              </div>
+            ))}
           </RadioGroup>
         </AccordionContent>
       </AccordionItem>

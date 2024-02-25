@@ -12,31 +12,33 @@ type SkeletopProps = {
   isHome?: boolean;
 };
 
-const CardSkeleton: React.FC<SkeletopProps> = ({ isHome = false }) => {
-  return (
-    <Card className="flex h-full w-full flex-col min-w-[140px]">
-      <Skeleton className="h-72 w-full bg-accent" />
-      <CardHeader>
-        <CardTitle>
-          <Skeleton className="h-2 w-full bg-accent" />
-        </CardTitle>
-        <div>
-          <Skeleton className="h-2 w-8 bg-accent" />
-        </div>
-      </CardHeader>
-      {!isHome && (
-        <div className="flex flex-grow flex-col justify-between">
-          <CardContent className="text-2xl">
-            <Skeleton className="h-8 w-8 bg-accent" />
-          </CardContent>
-          <CardFooter className="space-x-4">
-            <Skeleton className="h-8 w-8 bg-accent" />
-            <Skeleton className="h-8 w-8 bg-accent" />
-          </CardFooter>
-        </div>
-      )}
-    </Card>
-  );
-};
+const CardSkeleton: React.FC<SkeletopProps> = ({ isHome = false }) => (
+  <Card className="flex h-full w-full min-w-[140px] flex-col">
+    <Skeleton className="h-72 w-full bg-accent" />
+
+    <CardHeader>
+      <CardTitle>
+        <Skeleton className="h-2 w-full bg-accent" />
+      </CardTitle>
+
+      <div>
+        <Skeleton className="h-2 w-8 bg-accent" />
+      </div>
+    </CardHeader>
+
+    {!isHome && (
+      <div className="flex flex-grow flex-col justify-between">
+        <CardContent className="text-2xl">
+          <Skeleton className="h-8 w-8 bg-accent" />
+        </CardContent>
+
+        <CardFooter className="space-x-4">
+          <Skeleton className="h-8 w-8 bg-accent" />
+          <Skeleton className="h-8 w-8 bg-accent" />
+        </CardFooter>
+      </div>
+    )}
+  </Card>
+);
 
 export default CardSkeleton;

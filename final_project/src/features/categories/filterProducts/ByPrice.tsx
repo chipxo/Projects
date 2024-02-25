@@ -17,10 +17,11 @@ import {
   setLowestPr,
 } from "../categoryProducts/categoryFilteredProducts/filteredProductsSlice";
 import { Button } from "@/components/ui/button";
-import { forwardRef, useEffect } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { makeAlert } from "@/features/alert/alertSlice";
 import { fetchFilterCategoryPrice } from "@/hooks/fetchFilterCategoryPrice";
 import { useParams } from "react-router-dom";
+import { checkBoxesPrice } from "./checkBoxesList";
 
 type ClickType = {
   onClick: () => void;
@@ -41,7 +42,17 @@ const ByPrice = forwardRef<HTMLButtonElement, ClickType>(({ onClick }, ref) => {
     highestPr,
   } = useSelector((state: RootState) => state.categoryFilteredProducts);
 
-  const filterByPrice = (isReverse: boolean) => {
+  const [checkedBoxes, setChekedBoxes] = useState(checkBoxesPrice);
+
+  const filterByPrice = (isReverse: boolean, id: string) => {
+    setChekedBoxes((pr) =>
+      pr.map((checkBox) =>
+        checkBox.id === id
+          ? { ...checkBox, checked: !checkBox.checked }
+          : { ...checkBox, checked: false },
+      ),
+    );
+
     if (products) {
       const sortedProducts = [...products].sort((a, b) =>
         isReverse ? a.price - b.price : b.price - a.price,
@@ -51,12 +62,12 @@ const ByPrice = forwardRef<HTMLButtonElement, ClickType>(({ onClick }, ref) => {
     }
   };
 
-  const handleFilterPrice = async () => {
-    if (highestPr > lowestPr) {
-      // await dispatch(
-      //   fetchFilterCategoryPrice({ lowestPr, highestPr, categoryId }),
-      // );
+  const handlePriceRangeFilter = () => {
+    setChekedBoxes((pr) =>
+      pr.map((checkBox) => ({ ...checkBox, checked: false })),
+    );
 
+    if (highestPr > lowestPr) {
       dispatch(setCategoryProducts(filteredProducts));
     } else if (highestPr && lowestPr) {
       dispatch(makeAlert("Highest price has to be more than lowest"));
@@ -81,26 +92,26 @@ const ByPrice = forwardRef<HTMLButtonElement, ClickType>(({ onClick }, ref) => {
         <AccordionTrigger ref={ref} onClick={onClick}>
           By price
         </AccordionTrigger>
+
         <AccordionContent className="px-2 py-2">
-          <RadioGroup defaultValue="">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem
-                value="default"
-                id="r1"
-                onClick={() => filterByPrice(false)}
-              />
-              <Label htmlFor="r1">Highest to lowest</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem
-                value="comfortable"
-                id="r2"
-                onClick={() => filterByPrice(true)}
-              />
-              <Label htmlFor="r2">Lowest to highest</Label>
-            </div>
+          <RadioGroup>
+            {checkedBoxes.map(({ id, value, filter, text, checked }) => (
+              <div key={id} className="flex items-center space-x-2">
+                <RadioGroupItem
+                  id={id}
+                  value={value}
+                  checked={checked}
+                  onClick={() => filterByPrice(filter, id)}
+                />
+                <Label htmlFor={id} className="cursor-pointer ">
+                  {text}
+                </Label>
+              </div>
+            ))}
           </RadioGroup>
+
           <p className="my-4  text-center text-lg">or</p>
+
           <div className="mb-2 grid gap-x-5 gap-y-2 sm:grid-cols-2">
             <Input
               name="lowestPr"
@@ -108,6 +119,7 @@ const ByPrice = forwardRef<HTMLButtonElement, ClickType>(({ onClick }, ref) => {
               value={lowestPr || ""}
               onChange={(e) => handleLowPr(e.target.value)}
             />
+
             <Input
               name="highestPr"
               placeholder="Enter highest price"
@@ -115,8 +127,9 @@ const ByPrice = forwardRef<HTMLButtonElement, ClickType>(({ onClick }, ref) => {
               onChange={(e) => handleHighPr(e.target.value)}
             />
           </div>
+
           <Button
-            onClick={handleFilterPrice}
+            onClick={handlePriceRangeFilter}
             variant="secondary"
             className="w-full"
           >

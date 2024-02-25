@@ -48,12 +48,17 @@ const CommonCard: React.FC<CardProps> = ({
     checkItem();
   }, []);
 
-  const handleAddBtn = async (id: number, title: string, price: number) => {
+  const handleAddBtn = async (
+    id: number,
+    title: string,
+    price: number,
+    image: string,
+  ) => {
     try {
-      await addProduct({ id, title, price });
-
       dispatch(addAmount());
       setChecked(true);
+
+      await addProduct({ id, title, price, image });
     } catch (e) {
       console.log(`Error in addBtn: ${e}`);
     }
@@ -61,10 +66,10 @@ const CommonCard: React.FC<CardProps> = ({
 
   const handleDelBtn = async (id: number) => {
     try {
-      await deleteProduct(id);
-
       dispatch(decreaseAmount());
       setChecked(false);
+
+      await deleteProduct(id);
     } catch (e) {
       console.log(`Error in delBtn: ${e}`);
     }
@@ -77,7 +82,7 @@ const CommonCard: React.FC<CardProps> = ({
       <img
         onClick={() => navigate(`/products/${id}`)}
         src={images?.[0]}
-        className="h-[335px] w-full cursor-pointer rounded-t-md object-cover"
+        className="h-[335px] w-full cursor-pointer rounded-t-md border-b object-cover"
         alt={title}
       />
 
@@ -113,7 +118,7 @@ const CommonCard: React.FC<CardProps> = ({
               {cartDelete}
             </Button>
             <Button
-              onClick={() => handleAddBtn(id, title, price)}
+              onClick={() => handleAddBtn(id, title, price, images?.[0])}
               disabled={checked}
               variant="outline"
             >

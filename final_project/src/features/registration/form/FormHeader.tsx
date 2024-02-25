@@ -34,6 +34,7 @@ const FormHeader: React.FC<FormHeaderProps> = ({ reset }) => {
       >
         Sign in
       </Button>
+
       <Button
         onClick={() => {
           reset();

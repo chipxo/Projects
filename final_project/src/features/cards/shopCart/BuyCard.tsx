@@ -64,34 +64,39 @@ const BuyCard: React.FC<ProductType> = ({
         <img
           src={images?.[1]}
           alt={title}
-          className=" h-full w-full rounded-md object-cover md:block"
+          className="h-full w-full rounded-md object-cover md:block"
         />
         <Avatar className="hidden">
           <AvatarImage src={images?.[1]} />
           <AvatarFallback />
         </Avatar>
       </CardHeader>
-      <div className="flex flex-grow flex-col">
+
+      <div>
         <CardHeader className="max-md:mb-2">
           <Link to={`/products/${id}`}>
             <CardTitle>{title}</CardTitle>
           </Link>
         </CardHeader>
+
         <CardContent>
-          <p className="w-[100px] text-lg md:text-2xl">{price || prodPrice}$</p>
+          {!!price && <p className="w-[80px] text-lg md:text-2xl">{price}$</p>}
         </CardContent>
-        <CardFooter className="flex-grow">
-          <div className="grid grid-cols-[1fr_0.7fr] md:grid-cols-2 md:gap-8">
+
+        <CardFooter>
+          <div className="min-w-1/2 grid grid-cols-[1fr_0.7fr] md:grid-cols-2 md:gap-8">
             <div className="grid grid-cols-3 justify-items-center gap-3 sm:pr-4 md:border-r">
               <Button variant="ghost" className="text-xl" onClick={incCount}>
                 +
               </Button>
+
               <Button
                 variant="outline"
                 className="cursor-default hover:bg-background"
               >
                 {count ?? 1}
               </Button>
+
               <Button
                 onClick={decrCount}
                 variant="ghost"
@@ -101,6 +106,7 @@ const BuyCard: React.FC<ProductType> = ({
                 -
               </Button>
             </div>
+
             <div className="w-fit max-sm:justify-self-end">
               <Button onClick={deleteItem}>{cartDelete}</Button>
             </div>

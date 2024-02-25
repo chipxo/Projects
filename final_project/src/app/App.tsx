@@ -20,7 +20,7 @@ const App = () => {
 
     WebFont.load({
       google: {
-        families: ["Merriweather", "Roboto Condensed"],
+        families: ["Montserrat", "Raleway"],
       },
     });
   }, []);

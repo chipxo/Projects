@@ -40,6 +40,7 @@ const SingleCardPage = () => {
           />
         )}
       </AnimatePresence>
+
       <section>
         <div className="container">
           {loading && <SingleCardSkeleton />}

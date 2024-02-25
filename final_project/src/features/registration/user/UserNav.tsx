@@ -21,10 +21,12 @@ const UserNav = () => {
             {closeIcon}
           </Button>
         </li>
+
         <li className="scale-110 md:hidden">
           <ModeToggle />
         </li>
       </ul>
+
       <div className="hidden justify-self-end pr-4 sm:block">
         <Logo />
       </div>
