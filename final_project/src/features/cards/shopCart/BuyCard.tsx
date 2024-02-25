@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ProductType } from "@/types/types";
-import React, { useLayoutEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import incPrice from "@/indexedDB/incPrice";
 import decPrice from "@/indexedDB/decPrice";
@@ -55,14 +55,6 @@ const BuyCard: React.FC<ProductType> = ({
     }
   };
 
-  const [updatedProdPrice, setUpdatedProdPrice] = useState(prodPrice);
-
-  useLayoutEffect(() => {
-    setUpdatedProdPrice(price);
-  }, [price]);
-
-  const [locCount, setLocCount] = useState(1);
-
   return (
     <Card
       key={id}
@@ -86,7 +78,7 @@ const BuyCard: React.FC<ProductType> = ({
           </Link>
         </CardHeader>
         <CardContent>
-          <p className="text-lg md:text-2xl">{updatedProdPrice}$</p>
+          <p className="w-[100px] text-lg md:text-2xl">{price || prodPrice}$</p>
         </CardContent>
         <CardFooter className="flex-grow">
           <div className="grid grid-cols-[1fr_0.7fr] md:grid-cols-2 md:gap-8">

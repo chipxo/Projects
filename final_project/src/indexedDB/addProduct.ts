@@ -6,15 +6,23 @@ type AddProductProps = {
   title: string;
   price: number;
   count?: number;
+  image: string;
 };
 
-const addProduct = async ({ id, title, price, count = 1 }: AddProductProps) => {
+const addProduct = async ({
+  id,
+  title,
+  price,
+  count = 1,
+  image,
+}: AddProductProps) => {
   try {
     await db.addedProducts.add({
       id,
       title,
       price,
       count,
+      image,
     });
 
     await updateTotPrice();

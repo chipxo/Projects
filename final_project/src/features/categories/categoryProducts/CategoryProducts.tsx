@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import CategoriesSkeleton from "../CategoriesSkeleton";
+import { fetchFilterCategoryPrice } from "@/hooks/fetchFilterCategoryPrice";
 
 const CategoryProducts = () => {
   const dispatch = useAppDispatch();
@@ -53,7 +54,7 @@ const CategoryProducts = () => {
           </>
         )}
 
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-home">
+        <div className="grid grid-cols-[repeat(auto-fill,_minmax(260px,_1fr))] gap-4 md:grid-cols-home">
           {!loading && !error && !!products?.length
             ? products.map((product) => (
                 <CommonCard key={nanoid()} {...product} />

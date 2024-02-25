@@ -11,7 +11,7 @@ type ProductsStateType = {
 const initialState: ProductsStateType = {
   products: undefined,
   loading: false,
-  error: {},
+  error: null,
 };
 
 const productsSlice = createSlice({

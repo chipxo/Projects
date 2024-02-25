@@ -4,6 +4,7 @@ import ErrorMessage from "@/components/common/ErrorMessage";
 import Gallery from "@/components/containers/gallery/Gallery";
 import SingleCard from "@/features/cards/singleCard/SingleCard";
 import SingleCardSkeleton from "@/features/cards/singleCard/SingleCardSkeleton";
+import { setInputValue } from "@/features/searchBar/searchSlice";
 import { fetchProduct } from "@/hooks/fetchProduct";
 import { ProductType } from "@/types/types";
 import { AnimatePresence } from "framer-motion";
@@ -25,7 +26,8 @@ const SingleCardPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchProduct(Number(prodId)));
-  }, [dispatch]);
+    dispatch(setInputValue(""));
+  }, [dispatch, prodId]);
 
   return (
     <>
@@ -41,7 +43,9 @@ const SingleCardPage = () => {
       <section>
         <div className="container">
           {loading && <SingleCardSkeleton />}
+
           {error && <ErrorMessage error={error} />}
+
           {!loading && !error && (
             <SingleCard
               {...(product as ProductType)}

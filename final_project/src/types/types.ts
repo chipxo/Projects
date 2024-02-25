@@ -26,6 +26,7 @@ export type AddedProductType = {
   title: string;
   price: number;
   count: number;
+  image: string;
 };
 
 export type TotalPriceType = {

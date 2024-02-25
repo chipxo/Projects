@@ -8,7 +8,7 @@ export class Vivo extends Dexie {
   constructor() {
     super("Vivo");
     this.version(1).stores({
-      addedProducts: "id, title, price, count",
+      addedProducts: "id, title, price, count, image",
       totalPrice: "id, totalPrice",
     });
   }

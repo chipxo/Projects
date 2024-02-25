@@ -12,11 +12,12 @@ import {
 } from "@/components/ui/card";
 import { ProductType } from "@/types/types";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addAmount, decreaseAmount } from "../../amount/amountSlice";
 import addProduct from "@/indexedDB/addProduct";
 import deleteProduct from "@/indexedDB/deleteProduct";
 import getItem from "@/indexedDB/getItem";
+import { twJoin } from "tailwind-merge";
 
 type CardProps = ProductType & {
   isHome?: boolean;
@@ -34,6 +35,8 @@ const CommonCard: React.FC<CardProps> = ({
   const dispatch = useAppDispatch();
 
   const [checked, setChecked] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkItem = async () => {
@@ -68,31 +71,37 @@ const CommonCard: React.FC<CardProps> = ({
   };
 
   return (
-    <Card className="flex h-full w-full flex-col">
+    <Card className="flex h-full min-h-[428px] w-full flex-col">
       {/* Image */}
-      <Link to={`/products/${id}`}>
-        <img
-          src={images?.[0]}
-          className="w-full cursor-pointer rounded-t-md object-cover"
-          alt={title}
-        />
-      </Link>
-      <CardHeader>
+
+      <img
+        onClick={() => navigate(`/products/${id}`)}
+        src={images?.[0]}
+        className="h-[335px] w-full cursor-pointer rounded-t-md object-cover"
+        alt={title}
+      />
+
+      <CardHeader
+        className={twJoin("justify-between", isHome ? "flex-grow" : null)}
+      >
         {!isHome && (
           <Badge variant="outline" className="mb-2 w-fit">
             <p>{category?.name}</p>
           </Badge>
         )}
+
         <Link to={`/products/${id}`}>
           <CardTitle className="mb-2 font-thin leading-6">{title}</CardTitle>
         </Link>
+
         {isHome && (
-          <CardDescription className="text-xl">{`$${price}`}</CardDescription>
+          <CardDescription className="text-xl">${price}</CardDescription>
         )}
       </CardHeader>
+
       {!isHome && (
-        <div className="flex flex-grow flex-col justify-between">
-          <CardContent className="text-2xl">
+        <div className="mt-auto flex flex-col justify-between">
+          <CardContent className="text-2xl md:py-0">
             <p>${price}</p>
           </CardContent>
           <CardFooter className="space-x-4">

@@ -1,6 +1,8 @@
+import { useAppDispatch } from "@/app/store";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ProductType } from "@/types/types";
 import { Link } from "react-router-dom";
+import { setInputValue } from "../searchSlice";
 
 const SearchPageItems: React.FC<ProductType> = ({
   id,

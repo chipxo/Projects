@@ -76,6 +76,10 @@ input {
   @apply font-Roboto-Condensed;
 }
 
+img {
+  @apply text-center font-Merriweather;
+}
+
 .slick-arrow.slick-prev,
 .slick-arrow.slick-next {
   &::before {

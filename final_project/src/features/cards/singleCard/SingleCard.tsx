@@ -40,6 +40,7 @@ const SingleCard: React.FC<SingleCardType> = ({
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
     const checkItem = async () => {
       const item = await getItem(Number(prodId) || id);
 
@@ -49,11 +50,16 @@ const SingleCard: React.FC<SingleCardType> = ({
     checkItem();
   }, []);
 
-  const handleAddBtn = async (id: number, title: string, price: number) => {
+  const handleAddBtn = async (
+    id: number,
+    title: string,
+    price: number,
+    image: string,
+  ) => {
     dispatch(addAmount());
     setChecked(true);
 
-    await addProduct({ id, title, price });
+    await addProduct({ id, title, price, image });
   };
 
   const handleDelBtn = async (id: number) => {
@@ -64,7 +70,7 @@ const SingleCard: React.FC<SingleCardType> = ({
   };
 
   return (
-    <Card className="grid md:grid-cols-[0.4fr_1fr] xl:grid-cols-[0.25fr_1fr]">
+    <Card className="grid max-sm:min-h-[768px] sm:min-h-[374px] md:grid-cols-[0.4fr_1fr] xl:grid-cols-[0.25fr_1fr]">
       <CardHeader className="grid place-items-center md:pr-0">
         <div className="hidden h-full gap-2 rounded-md lg:grid">
           <img
@@ -110,7 +116,7 @@ const SingleCard: React.FC<SingleCardType> = ({
           <Button
             variant="outline"
             disabled={checked}
-            onClick={() => handleAddBtn(id, title, price)}
+            onClick={() => handleAddBtn(id, title, price, images?.[0])}
             className="mr-4"
           >
             {cartIcon}

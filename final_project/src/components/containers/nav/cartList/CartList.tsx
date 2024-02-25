@@ -1,8 +1,6 @@
 import { RootState } from "@/app/rootReducer";
 import { useAppDispatch } from "@/app/store";
-import ErrorMessage from "@/components/common/ErrorMessage";
 import { setAmount } from "@/features/amount/amountSlice";
-import { ProductType } from "@/types/types";
 import { mFLoatMenu } from "@/utils/motionSettings";
 import { AnimatePresence, motion as m } from "framer-motion";
 import React, { useEffect, useState } from "react";
@@ -27,26 +25,13 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
 
   const { amount } = useSelector((state: RootState) => state.amount);
 
-  const { products, loading, error } = useSelector(
-    (state: RootState) => state.products,
-  );
-
   const [open, setOpen] = useState(false);
-
-  const [cards, setCards] = useState<ProductType[] | null>(null);
 
   const addedProducts = useLiveQuery(() => db.addedProducts.toArray());
 
   useEffect(() => {
     dispatch(setAmount(addedProducts?.length as number));
   }, [dispatch, addedProducts]);
-
-  useEffect(() => {
-    const addedId = addedProducts?.map(({ id }) => id);
-    const filterItems = products?.filter(({ id }) => addedId?.includes(id));
-
-    setCards(filterItems as ProductType[]);
-  }, [products, addedProducts?.length]);
 
   return (
     <div
@@ -67,15 +52,12 @@ const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({
             <div className="grid max-h-[44vh] w-max cursor-pointer gap-y-4 overflow-auto rounded-md border bg-background p-4 max-sm:max-w-[80vw]">
               <ToShoppingCart onClick={() => setOpen(false)} />
 
-              {loading &&
+              {!addedProducts &&
                 "qw".split("").map((char) => <CartListSkeleton key={char} />)}
-              {error && <ErrorMessage error={error} />}
 
-              {!loading &&
-                !error &&
-                cards?.map(
-                  (item) => !!item && <CartListItem key={nanoid()} {...item} />,
-                )}
+              {addedProducts?.map((item) => (
+                <CartListItem key={nanoid()} {...item} />
+              ))}
             </div>
           </m.div>
         ) : (

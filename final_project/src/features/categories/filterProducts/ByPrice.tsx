@@ -17,8 +17,10 @@ import {
   setLowestPr,
 } from "../categoryProducts/categoryFilteredProducts/filteredProductsSlice";
 import { Button } from "@/components/ui/button";
-import { forwardRef } from "react";
+import { forwardRef, useEffect } from "react";
 import { makeAlert } from "@/features/alert/alertSlice";
+import { fetchFilterCategoryPrice } from "@/hooks/fetchFilterCategoryPrice";
+import { useParams } from "react-router-dom";
 
 type ClickType = {
   onClick: () => void;
@@ -30,6 +32,8 @@ const ByPrice = forwardRef<HTMLButtonElement, ClickType>(({ onClick }, ref) => {
   const { products } = useSelector(
     (state: RootState) => state.categoryProducts,
   );
+
+  const { categoryId } = useParams();
 
   const {
     products: filteredProducts,
@@ -47,8 +51,12 @@ const ByPrice = forwardRef<HTMLButtonElement, ClickType>(({ onClick }, ref) => {
     }
   };
 
-  const handleFilterPrice = () => {
+  const handleFilterPrice = async () => {
     if (highestPr > lowestPr) {
+      // await dispatch(
+      //   fetchFilterCategoryPrice({ lowestPr, highestPr, categoryId }),
+      // );
+
       dispatch(setCategoryProducts(filteredProducts));
     } else if (highestPr && lowestPr) {
       dispatch(makeAlert("Highest price has to be more than lowest"));
@@ -56,12 +64,16 @@ const ByPrice = forwardRef<HTMLButtonElement, ClickType>(({ onClick }, ref) => {
   };
 
   const handleLowPr = (value: string) => {
-    !isNaN(Number(value)) && dispatch(setLowestPr(Number(value)));
+    dispatch(setLowestPr(Number(value)));
   };
 
   const handleHighPr = (value: string) => {
-    !isNaN(Number(value)) && dispatch(setHighestPr(Number(value)));
+    dispatch(setHighestPr(Number(value)));
   };
+
+  useEffect(() => {
+    dispatch(fetchFilterCategoryPrice({ lowestPr, highestPr, categoryId }));
+  }, [lowestPr, highestPr, categoryId]);
 
   return (
     <Accordion type="single" collapsible>

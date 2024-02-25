@@ -1,4 +1,5 @@
 import {
+  goToRightIcon,
   instagramIcon,
   tikTokIcon,
   twitterIcon,
@@ -37,6 +38,12 @@ const Footer = () => {
           ))}
         </ul>
       </nav>
+      <a href="https://portfolio-serhii-chiypesh.web.app/">
+        Made by <br />
+        <span className="text-xl underline">
+          Serhii Chyipesh {goToRightIcon}
+        </span>
+      </a>
     </footer>
   );
 };
