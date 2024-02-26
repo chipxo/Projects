@@ -5,7 +5,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import SliderHeader from "./SliderHeader";
-import isValidImage from "@/utils/isValidImage";
 import sliderSettings from "./sliderSettings";
 
 type CarouselProps = {

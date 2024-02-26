@@ -31,6 +31,10 @@ const filteredProductsSlice = createSlice({
     setFilteredProducts: (state, action: PayloadAction<ProductType[]>) => {
       state.products = action.payload;
     },
+    resetPrices: (state) => {
+      state.lowestPr = 0;
+      state.highestPr = 0;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -56,7 +60,7 @@ const filteredProductsSlice = createSlice({
   },
 });
 
-export const { setLowestPr, setHighestPr, setFilteredProducts } =
+export const { setLowestPr, setHighestPr, setFilteredProducts, resetPrices } =
   filteredProductsSlice.actions;
 
 export default filteredProductsSlice.reducer;

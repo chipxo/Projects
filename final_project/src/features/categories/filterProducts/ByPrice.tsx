@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label.tsx";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group.tsx";
 import { ProductType } from "@/types/types";
 import {
+  resetPrices,
   setHighestPr,
   setLowestPr,
 } from "../categoryProducts/categoryFilteredProducts/filteredProductsSlice";
@@ -68,7 +69,12 @@ const ByPrice = forwardRef<HTMLButtonElement, ClickType>(({ onClick }, ref) => {
     );
 
     if (highestPr > lowestPr) {
-      dispatch(setCategoryProducts(filteredProducts));
+      if (!!filteredProducts.length) {
+        dispatch(setCategoryProducts(filteredProducts));
+      } else {
+        dispatch(makeAlert("No products in this range :("));
+        dispatch(resetPrices());
+      }
     } else if (highestPr && lowestPr) {
       dispatch(makeAlert("Highest price has to be more than lowest"));
     }
