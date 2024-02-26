@@ -1,17 +1,16 @@
 import { fetchAmountOfProducts } from "@/hooks/fetchAmountOfProducts";
-import { ProductType } from "@/types/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-type ProductsStateType = {
+type InitialStateType = {
   products: ProductType[] | undefined;
   loading: boolean;
   error: string | null | {};
 };
 
-const initialState: ProductsStateType = {
+const initialState: InitialStateType = {
   products: [],
   loading: false,
-  error: {},
+  error: null,
 };
 
 const amountOfProductsSlice = createSlice({
@@ -42,7 +41,7 @@ const amountOfProductsSlice = createSlice({
         fetchAmountOfProducts.rejected,
         (state, action: PayloadAction<unknown, string>) => {
           state.loading = false;
-          state.error = action.payload ?? "Fetch failed";
+          state.error = action.payload || "Fetch failed";
         },
       );
   },

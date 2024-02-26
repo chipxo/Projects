@@ -7,6 +7,7 @@ import { mOpacity } from "@/utils/motionSettings";
 import { nanoid } from "@reduxjs/toolkit";
 import { motion as m } from "framer-motion";
 import { useSelector } from "react-redux";
+import { twJoin } from "tailwind-merge";
 
 const SearchResults = () => {
   const { inputValue, products, loading, error } = useSelector(
@@ -14,7 +15,13 @@ const SearchResults = () => {
   );
 
   return (
-    <section className="min-h-[70vh] border-y">
+    <section
+      className={twJoin(
+        "border-y",
+        !!products?.length ? null : "grid",
+        inputValue ? null : "grid",
+      )}
+    >
       {error && <ErrorMessage error={error} />}
 
       {inputValue && products && products?.length > 0 ? (
@@ -39,7 +46,7 @@ const SearchResults = () => {
           </div>
         </div>
       ) : (
-        <NoProducts />
+        !loading && !error && <NoProducts />
       )}
     </section>
   );

@@ -1,4 +1,3 @@
-import { ProductType } from "@/types/types";
 import { nanoid } from "@reduxjs/toolkit";
 import React from "react";
 import Slider from "react-slick";
@@ -17,19 +16,17 @@ const Carousel: React.FC<CarouselProps> = ({ products }) => (
       <SliderHeader />
     </div>
 
-    {products && (
-      <Slider {...sliderSettings}>
-        {products.map(({ title, images }) => (
-          <div key={nanoid()} className="px-1.5">
-            <img
-              src={images[1]}
-              className="h-fit max-h-24 w-full rounded-md object-cover md:max-h-44"
-              alt={title}
-            />
-          </div>
-        ))}
-      </Slider>
-    )}
+    <Slider {...sliderSettings}>
+      {products?.map(({ title, images }) => (
+        <div key={nanoid()} className="px-1.5">
+          <img
+            src={images[1]}
+            className="h-fit max-h-24 w-full rounded-md object-cover md:max-h-44"
+            alt={title}
+          />
+        </div>
+      ))}
+    </Slider>
   </div>
 );
 

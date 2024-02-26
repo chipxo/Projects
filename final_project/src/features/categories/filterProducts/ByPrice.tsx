@@ -11,7 +11,6 @@ import { useAppDispatch } from "@/app/store";
 import { Input } from "@/components/ui/input.tsx";
 import { Label } from "@/components/ui/label.tsx";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group.tsx";
-import { ProductType } from "@/types/types";
 import {
   resetPrices,
   setHighestPr,

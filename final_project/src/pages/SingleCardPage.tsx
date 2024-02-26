@@ -6,7 +6,6 @@ import SingleCard from "@/features/cards/singleCard/SingleCard";
 import SingleCardSkeleton from "@/features/cards/singleCard/SingleCardSkeleton";
 import { setInputValue } from "@/features/searchBar/searchSlice";
 import { fetchProduct } from "@/hooks/fetchProduct";
-import { ProductType } from "@/types/types";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";

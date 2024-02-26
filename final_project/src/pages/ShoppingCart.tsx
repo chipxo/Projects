@@ -6,7 +6,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import BuyCard from "@/features/cards/shopCart/BuyCard";
 import SingleCardSkeleton from "@/features/cards/singleCard/SingleCardSkeleton";
 import { fetchProducts } from "@/hooks/fetchProducts";
-import { ProductType } from "@/types/types";
 import { nanoid } from "@reduxjs/toolkit";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";

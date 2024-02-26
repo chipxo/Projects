@@ -46,7 +46,7 @@ const PanelContent = () => {
           Sign out
         </Button>
 
-        <Button onClick={() => setOpen(!open)} variant="default">
+        <Button onClick={() => setOpen((pr) => !pr)} variant="default">
           Delete account
         </Button>
 
@@ -63,7 +63,7 @@ const PanelContent = () => {
                   Yes
                 </Button>
 
-                <Button onClick={() => setOpen(!open)} variant="outline">
+                <Button onClick={() => setOpen((pr) => !pr)} variant="outline">
                   No
                 </Button>
               </div>

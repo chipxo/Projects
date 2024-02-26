@@ -10,10 +10,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ProductType } from "@/types/types";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { addAmount, decreaseAmount } from "../../amount/amountSlice";
+import { addAmount, decreaseAmount } from "@/features/amount/amountSlice";
 import addProduct from "@/indexedDB/addProduct";
 import deleteProduct from "@/indexedDB/deleteProduct";
 import getItem from "@/indexedDB/getItem";

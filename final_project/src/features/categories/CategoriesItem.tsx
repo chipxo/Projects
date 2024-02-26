@@ -1,5 +1,4 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { CategoriesType } from "@/types/types";
 import React from "react";
 import { Link } from "react-router-dom";
 

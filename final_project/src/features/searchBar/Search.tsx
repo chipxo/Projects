@@ -29,10 +29,14 @@ const Search = () => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const inputElement = document.activeElement as HTMLElement;
+
       if (e.key === "Enter" && inputElement.getAttribute("name") === "search") {
         setOpen(false);
+
         navigate("/searchResults");
+
         inputElement.blur();
+
         dispatch(fetchSearchProducts(inputValue));
       }
     };

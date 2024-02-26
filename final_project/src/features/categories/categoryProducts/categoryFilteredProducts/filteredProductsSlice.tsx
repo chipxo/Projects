@@ -1,5 +1,4 @@
 import { fetchFilterCategoryPrice } from "@/hooks/fetchFilterCategoryPrice";
-import { ProductType } from "@/types/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type InitialStateType = {

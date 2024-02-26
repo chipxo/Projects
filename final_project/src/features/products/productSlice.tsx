@@ -1,14 +1,13 @@
 import { fetchProduct } from "@/hooks/fetchProduct";
-import { ProductType } from "@/types/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-type CardsState = {
+type InitialStateType = {
   product: ProductType | undefined;
   loading: boolean;
   error: string | null | {};
 };
 
-const initialState: CardsState = {
+const initialState: InitialStateType = {
   product: undefined,
   loading: false,
   error: null,

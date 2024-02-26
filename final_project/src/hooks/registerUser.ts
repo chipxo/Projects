@@ -4,22 +4,9 @@ import {
   closeForm,
   setRegistered,
 } from "@/features/registration/registerSlice";
-import { Dispatch } from "@reduxjs/toolkit";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-type RegisterProps = {
-  name: string | undefined;
-  email: string;
-  password: string;
-  dispatch: Dispatch;
-};
-
-const registerUser = async ({
-  name,
-  email,
-  password,
-  dispatch,
-}: RegisterProps) => {
+const registerUser = async ({ name, email, password, dispatch }: AuthType) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
   console.log(user);
 

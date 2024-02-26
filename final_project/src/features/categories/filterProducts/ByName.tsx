@@ -10,7 +10,6 @@ import { setCategoryProducts } from "../categoryProducts/categoryProductsSlice";
 import { useAppDispatch } from "@/app/store";
 import { Label } from "@/components/ui/label.tsx";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group.tsx";
-import { ProductType } from "@/types/types";
 import { forwardRef } from "react";
 import { checkBoxesName } from "./checkBoxesList";
 

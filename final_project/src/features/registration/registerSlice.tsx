@@ -1,4 +1,3 @@
-import { User } from "@/types/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type Error = {
@@ -6,7 +5,7 @@ type Error = {
   statusCode: number;
 };
 
-type InitialState = {
+type InitialStateType = {
   alreadyRegistered: boolean;
   signedIn: boolean;
   openForm: boolean;
@@ -16,7 +15,7 @@ type InitialState = {
   error: {} | Error | null;
 };
 
-const initialState: InitialState = {
+const initialState: InitialStateType = {
   alreadyRegistered: true,
   signedIn: false,
   openForm: false,

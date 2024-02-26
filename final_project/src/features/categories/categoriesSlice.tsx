@@ -1,15 +1,14 @@
 import { fetchCategories } from "@/hooks/fetchCategories";
-import { CategoriesType } from "@/types/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type InitialStateType = {
-  categories: CategoriesType[] | null;
+  categories: CategoriesType[] | undefined;
   loading: boolean;
   error: string | null | {};
 };
 
 const initialState: InitialStateType = {
-  categories: null,
+  categories: undefined,
   loading: false,
   error: null,
 };

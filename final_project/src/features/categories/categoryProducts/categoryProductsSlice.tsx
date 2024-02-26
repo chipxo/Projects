@@ -1,5 +1,4 @@
 import { fetchCategoryProducts } from "@/hooks/fetchCategoryProducts";
-import { ProductType } from "@/types/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type InitialStateType = {

@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ProductType } from "@/types/types";
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import incPrice from "@/indexedDB/incPrice";
@@ -29,7 +28,7 @@ const BuyCard: React.FC<ProductType> = memo(
 
     const incCount = async () => {
       try {
-        await incPrice(id, prodPrice * (count + 1));
+        await incPrice(id, prodPrice * (count! + 1));
       } catch (e) {
         console.log(`Error in incCount: ${e}`);
       }
@@ -37,7 +36,7 @@ const BuyCard: React.FC<ProductType> = memo(
 
     const decrCount = async () => {
       try {
-        await decPrice(id, prodPrice * (count - 1));
+        await decPrice(id, prodPrice * (count! - 1));
       } catch (e) {
         console.log(`Error in decrCount: ${e}`);
       }

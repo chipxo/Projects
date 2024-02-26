@@ -10,7 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ProductType } from "@/types/types";
 import { nanoid } from "@reduxjs/toolkit";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";

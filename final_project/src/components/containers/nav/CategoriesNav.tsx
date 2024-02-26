@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { CategoriesType } from "@/types/types";
 import { mFLoatMenu } from "@/utils/motionSettings";
 import { nanoid } from "@reduxjs/toolkit";
 import { AnimatePresence, motion as m } from "framer-motion";
@@ -7,7 +6,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 type CategoriesProps = {
-  categories: CategoriesType[] | null;
+  categories: CategoriesType[] | undefined;
 };
 
 const CategoriesNav: React.FC<CategoriesProps> = ({ categories }) => {
@@ -35,7 +34,7 @@ const CategoriesNav: React.FC<CategoriesProps> = ({ categories }) => {
             <div className="absolute -top-3 z-[9999] h-4 w-full bg-transparent" />
 
             <div className="grid max-h-[60vh] cursor-pointer gap-y-4 overflow-auto rounded-md p-4">
-              <div className="text-md grid gap-y-4 font-Merriweather">
+              <div className="text-md font-Merriweather grid gap-y-4">
                 {categories?.map(({ id, name }) => (
                   <Link to={`/products/categories/${id}`} key={nanoid()}>
                     <Button variant="ghost" className="w-full justify-start">

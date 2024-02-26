@@ -1,4 +1,3 @@
-import { AddedProductType, TotalPriceType } from "@/types/types";
 import Dexie, { Table } from "dexie";
 
 export class Vivo extends Dexie {

@@ -22,24 +22,28 @@ const FormHeader: React.FC<FormHeaderProps> = ({ reset }) => {
     dispatch(closeForm());
   };
 
+  const handleSignIn = () => {
+    reset();
+    dispatch(setRegistered(true));
+  };
+
+  const handleRegister = () => {
+    reset();
+    dispatch(setRegistered(false));
+  };
+
   return (
     <div className="relative grid grid-cols-2 justify-items-center border-b px-8 py-2 lg:gap-x-12">
       {/* Buttons for switch between Sign in and Register */}
       <Button
-        onClick={() => {
-          reset();
-          dispatch(setRegistered(true));
-        }}
+        onClick={handleSignIn}
         variant={alreadyRegistered ? "default" : "outline"}
       >
         Sign in
       </Button>
 
       <Button
-        onClick={() => {
-          reset();
-          dispatch(setRegistered(false));
-        }}
+        onClick={handleRegister}
         variant={!alreadyRegistered ? "default" : "outline"}
       >
         Register

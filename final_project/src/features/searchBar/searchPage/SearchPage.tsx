@@ -1,6 +1,5 @@
 import { RootState } from "@/app/rootReducer.tsx";
 import ErrorMessage from "@/components/common/ErrorMessage";
-import { ProductType } from "@/types/types.tsx";
 import { nanoid } from "@reduxjs/toolkit";
 import React from "react";
 import { useSelector } from "react-redux";

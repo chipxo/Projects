@@ -7,7 +7,7 @@ const incPrice = async (id: number, amount: number) => {
 
     if (product) {
       product.price = amount;
-      product.count++;
+      product.count!++;
 
       await db.addedProducts.put(product);
 

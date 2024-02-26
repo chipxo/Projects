@@ -1,4 +1,3 @@
-import { CategoriesType } from "@/types/types.tsx";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
 

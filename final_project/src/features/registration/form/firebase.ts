@@ -23,9 +23,9 @@ export const googleProvider = new GoogleAuthProvider();
 export const handleGoogleSignIn = async (dispatch: Dispatch) => {
   try {
     const { user } = await signInWithPopup(auth, googleProvider);
-    console.log("Google user:", user);
 
     const { displayName } = user;
+
     localStorage.setItem("userName", `${displayName}`);
     localStorage.setItem("signedIn", "true");
 
@@ -34,8 +34,8 @@ export const handleGoogleSignIn = async (dispatch: Dispatch) => {
     dispatch(closeForm());
 
     dispatch(makeAlert("You successfully signed in"));
-  } catch (error) {
-    console.error("Google sign-in error:", error);
+  } catch (e) {
+    console.log(`Google sign-in error: ${e}`);
 
     dispatch(makeAlert("Sign in failed, try again!"));
   }
