@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import HomeLoading from "./HomeLoading";
 import { delAmountOfProducts } from "@/features/products/amountProdSlice";
+import MobileSlider from "@/components/containers/mobileSlider/MobileSlider";
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -70,7 +71,7 @@ const Home = () => {
               </h2>
             )}
 
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-home">
+            <div className="grid grid-cols-home gap-4 max-sm:hidden">
               {!loading &&
                 !error &&
                 firstPrs?.map((product) => (
@@ -85,11 +86,13 @@ const Home = () => {
                 ))}
             </div>
 
-            <div className="mx-auto w-fit">
+            <div className="mx-auto w-fit max-sm:hidden">
               {!loading && !open && (
                 <Button onClick={() => setOpen(true)}>Show more</Button>
               )}
             </div>
+
+            <MobileSlider products={amountOfProducts!} />
           </div>
         </div>
       </section>

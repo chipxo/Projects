@@ -84,7 +84,7 @@ const SingleCard: React.FC<SingleCardType> = ({
   return (
     <Card className="grid max-sm:min-h-[768px] sm:min-h-[374px] md:grid-cols-[0.4fr_1fr] xl:grid-cols-[0.25fr_1fr]">
       <CardHeader className="grid place-items-center md:pr-0">
-        <div className="hidden h-full gap-2 rounded-md lg:grid">
+        <div className="hidden h-full gap-2 rounded-md pt-3 lg:grid">
           <img
             onClick={handleGalleryClick}
             src={images?.[0]}

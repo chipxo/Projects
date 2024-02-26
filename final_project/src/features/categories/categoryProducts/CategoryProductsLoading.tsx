@@ -10,7 +10,7 @@ const CategoryProductsLoading = () => (
       <CategoriesSkeleton />
     </div>
 
-    <div className="grid grid-cols-[repeat(auto-fill,_minmax(260px,_1fr))] gap-4 lg:grid-cols-5">
+    <div className="grid grid-cols-[repeat(auto-fill,_minmax(260px,_1fr))] gap-4">
       {"qwert".split("").map((_) => (
         <CardSkeleton key={nanoid()} />
       ))}

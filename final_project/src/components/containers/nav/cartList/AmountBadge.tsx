@@ -8,10 +8,10 @@ import { db } from "@/indexedDB/db";
 import { mOpacity } from "@/utils/motionSettings";
 import { useLiveQuery } from "dexie-react-hooks";
 import { motion as m, AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const AmountBadge = () => {
+const AmountBadge = memo(() => {
   const dispatch = useAppDispatch();
 
   const { amount } = useSelector((state: RootState) => state.amount);
@@ -39,6 +39,6 @@ const AmountBadge = () => {
       </AnimatePresence>
     </Button>
   );
-};
+});
 
 export default AmountBadge;

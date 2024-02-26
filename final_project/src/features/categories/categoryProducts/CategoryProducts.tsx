@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import CategoryProductsLoading from "./CategoryProductsLoading";
+import { twJoin } from "tailwind-merge";
 
 const CategoryProducts = () => {
   const dispatch = useAppDispatch();
@@ -27,10 +28,10 @@ const CategoryProducts = () => {
   }, [dispatch, categoryId]);
 
   return (
-    <section>
+    <section className={twJoin(!!products?.length ? null : "grid")}>
       {loading && <CategoryProductsLoading />}
 
-      <div className="container min-h-[70vh] py-10">
+      <div className="container py-10">
         {error && <ErrorMessage error={error} />}
 
         {!loading && !error && !!products?.length && (
@@ -40,7 +41,7 @@ const CategoryProducts = () => {
           </>
         )}
 
-        <div className="grid grid-cols-[repeat(auto-fill,_minmax(260px,_1fr))] gap-4 lg:grid-cols-5">
+        <div className="grid h-full grid-cols-[repeat(auto-fill,_minmax(260px,_1fr))] gap-4">
           {!loading && !error && !!products?.length
             ? products.map((product) => (
                 <CommonCard key={nanoid()} {...product} />

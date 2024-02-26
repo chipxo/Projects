@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "@/indexedDB/db";
+import { twJoin } from "tailwind-merge";
 
 const ShoppingCart = () => {
   const dispatch = useAppDispatch();
@@ -40,7 +41,7 @@ const ShoppingCart = () => {
   }, [products, addedProducts]);
 
   return (
-    <section className="min-h-[70vh]">
+    <section className={twJoin(totalPrice ? null : "grid")}>
       <div className="container py-4">
         {!loading && !!totalPrice && (
           <h2 className="pb-4">Total: {totalPrice}$</h2>
@@ -54,7 +55,7 @@ const ShoppingCart = () => {
         )}
         {error && <ErrorMessage error={error} />}
 
-        <div className="grid place-items-center gap-4">
+        <div className="grid h-full place-items-center gap-4">
           {!loading && !error && !!cards?.length
             ? cards?.map((card) => <BuyCard {...card} key={nanoid()} />)
             : !loading && <NoProducts />}
