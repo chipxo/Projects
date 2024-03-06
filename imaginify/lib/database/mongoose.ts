@@ -14,10 +14,14 @@ if (!cached) {
 }
 
 export const connectToDatabase = async () => {
-  if (cached.conn) return cached.conn;
+  if (cached.conn) {
+    console.log("Using cached connection");
+    return cached.conn;
+  }
 
   if (!MONGODB_URL) throw new Error("Miss the MONGODB_URL");
 
+  console.log("Connecting to MongoDB...");
   cached.promise =
     cached.promise ||
     mongoose.connect(MONGODB_URL, {
@@ -26,6 +30,7 @@ export const connectToDatabase = async () => {
     });
 
   cached.conn = await cached.promise;
+  console.log("Connected to MongoDB!");
 
   return cached.conn;
 };
