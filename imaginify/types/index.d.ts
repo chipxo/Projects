@@ -1,7 +1,5 @@
 /* eslint-disable no-unused-vars */
 
-import { ImageType } from "@/lib/database/models/image.model";
-
 // ====== USER PARAMS
 declare type CreateUserParams = {
   clerkId: string;
@@ -125,7 +123,7 @@ declare type TransformationFormProps = {
   userId: string;
   type: TransformationTypeKey;
   creditBalance: number;
-  data?: ImageType | null;
+  data?: IImage | null;
   config?: Transformations | null;
 };
 
