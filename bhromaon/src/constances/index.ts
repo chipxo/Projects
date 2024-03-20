@@ -1,3 +1,9 @@
+import {
+  faCircleCheck,
+  faMagnifyingGlass,
+  faThumbsUp,
+} from "@fortawesome/free-solid-svg-icons";
+
 export const navLinks = [
   {
     id: 1,
@@ -23,5 +29,23 @@ export const navLinks = [
     id: 5,
     text: "Contact Us",
     link: "#contactUs",
+  },
+];
+
+export const steps = [
+  {
+    id: 1,
+    text: "Search Places",
+    icon: faMagnifyingGlass,
+  },
+  {
+    id: 2,
+    text: "Select Places",
+    icon: faCircleCheck,
+  },
+  {
+    id: 3,
+    text: "Book & Enjoy",
+    icon: faThumbsUp,
   },
 ];

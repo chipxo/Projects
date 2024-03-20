@@ -22,7 +22,7 @@ const Header = () => (
             className="rounded-none bg-white py-6"
           />
           <Button
-            className="absolute right-1 top-1 h-[84%] items-center gap-2 rounded-none bg-primary uppercase"
+            className="absolute right-1 top-1 h-[84%] items-center gap-2 bg-primary uppercase"
             size={window.innerWidth > 768 ? "lg" : "sm"}
           >
             <FontAwesomeIcon icon={faMagnifyingGlass} />
