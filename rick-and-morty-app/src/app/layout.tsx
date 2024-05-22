@@ -3,9 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import {ThemeToggle} from "@/components/ThemeToggle";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import Image from "next/image";
-import BG from '@public/bg-img.jpg'
+import BG from "@public/bg-img.jpg";
+import footerImg from "@public/rick-and-morty-footer-img.jpg";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,20 +24,54 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head />
       <body className={inter.className}>
-       <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-        <Image src={BG} alt={""} className="fixed inset-0 -z-10 object-cover blur-sm h-full"/>
-        <NavBar />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Image
+            src={BG}
+            alt={""}
+            className="fixed inset-0 -z-10 h-full object-cover blur-sm"
+          />
+          <NavBar />
 
-        <div className="fixed bottom-4 right-4">
-          <ThemeToggle />
-        </div>
+          <div className="fixed bottom-4 right-4">
+            <ThemeToggle />
+          </div>
 
-        {children}
+          {children}
+
+          <footer className="bg-accent/90">
+            <div className="container py-6">
+              <h2 className="mb-3 text-center text-2xl">
+                Hi, My name is Serhii Chyipesh!
+              </h2>
+              <nav>
+                <ul>
+                  <li>
+                    <a href="mailto:chiypesh200059@gmail.com">
+                      Email me: chiypesh200059@gmail.com
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/chipxo">My GitHub</a>
+                  </li>
+                  <li>
+                    <a href="https://rickandmortyapi.com/">
+                      Link to API: https://rickandmortyapi.com/
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+
+              <p>
+                Tech stack I've used: Next.js, TypeScript, TailwindCSS,
+                Shadcn/ui, Axios
+              </p>
+            </div>
+          </footer>
         </ThemeProvider>
       </body>
     </html>

@@ -1,17 +1,17 @@
 export const navLinks = [
   {
     id: 1,
-    href: '/episodes',
-    name: 'Episodes',
+    href: "/episode",
+    name: "Episodes",
   },
   {
     id: 2,
-    href: '/characters',
-    name: 'Characters',
+    href: "/characters",
+    name: "Characters",
   },
   {
     id: 3,
-    href: '/locations',
-    name: 'Locations',
+    href: "/locations",
+    name: "Locations",
   },
-]
+];
