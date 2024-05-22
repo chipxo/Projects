@@ -10,7 +10,7 @@ const EpisodesPage =  async () => {
 
   return (
     <div className='container my-10'>
-      <h2 className='text-2xl font-semibold my-6'>All the episodes:</h2>
+      <h2 className='text-2xl font-semibold my-6 text-white'>All the episodes:</h2>
 
       <div>
         {episodes.map(episode => (

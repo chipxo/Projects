@@ -29,7 +29,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-        <Image src={BG} alt={""} className="fixed inset-0 -z-10 object-cover blur-sm"/>
+        <Image src={BG} alt={""} className="fixed inset-0 -z-10 object-cover blur-sm h-full"/>
         <NavBar />
 
         <div className="fixed bottom-4 right-4">

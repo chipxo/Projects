@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export async function useFetch(query: string) {
   const {data} = await axios.get(`https://rickandmortyapi.com/api/${query}`)
-  console.log(data);
+ 
   
   return data
 }

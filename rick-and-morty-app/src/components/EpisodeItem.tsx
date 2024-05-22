@@ -1,14 +1,11 @@
-import React from 'react'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import axios from 'axios'
 import { Button } from './ui/button'
 import { formatEpisode, useFetch } from '@/lib/utils'
 import Image from 'next/image'
@@ -23,12 +20,11 @@ const EpisodeItem = async ({ name, air_date, characters, episode }: Episode) => 
     const parts = url.split('/');
   return parseInt(parts[parts.length - 1]);
   })
- 
 
   const episodeCharacters: Character[] = await useFetch(`character/${charactersUrls}`)
  
   return (
-            <div className='border rounded-md my-2 p-2 grid bg-secondary/90'>
+            <div className='border rounded-md my-2 p-2 grid bg-accent/90'>
               <Dialog>
                 <DialogTrigger className='w-full text-start'>
                   <div className='grid grid-cols-[0.4fr,_1fr] gap-2'>
@@ -37,10 +33,10 @@ const EpisodeItem = async ({ name, air_date, characters, episode }: Episode) => 
                     <Image src={defaultImage} alt={'defaultImage'}
                       className='object-cover blur-md'
                     />
-                    <p className='absolute inset-0 grid place-items-center font-semibold'>{formatEpisode(episode)}</p>
+                    <p className='absolute inset-0 grid place-items-center font-semibold text-white'>{formatEpisode(episode)}</p>
                     </div>
                     <div className='flex flex-col p-2'>
-                      <p className='font-bold'>{name}</p>
+                      <p className='font-bold lg:text-2xl'>{name}</p>
                       
                       <p className='mt-4'>Air date: {air_date}</p>
                     </div>
@@ -70,10 +66,10 @@ const EpisodeItem = async ({ name, air_date, characters, episode }: Episode) => 
                           </div>
                           <div className='relative rounded-sm overflow-hidden'>
 
-                          <Image src={defaultEpisodeImage} alt={'defaultEpisodeImage'}
-                              className='object-contain h-full'
-                            />
-                            <div className='absolute inset-0 backdrop-blur-md grid place-items-center font-semibold'>{formatEpisode(episode)}</div>
+                          <Image src={defaultEpisodeImage} alt={'defaultImage'}
+                      className='object-cover h-full blur-lg border'
+                    />
+                            <div className='absolute inset-0 grid place-items-center font-semibold text-white'>{formatEpisode(episode)}</div>
                             </div>
                    
                   </DialogHeader>
