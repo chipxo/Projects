@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import EpisodeItems from "@/components/EpisodeItems";
+import EpisodeItems from "@/components/episode/EpisodeItems";
 import { useSearchParams } from "next/navigation";
 import PaginationItem from "@/components/PaginationItem";
 
@@ -11,7 +11,7 @@ const EpisodesPage = async () => {
   const page = searchParams.get("page");
 
   return (
-    <div className="container my-10">
+    <section className="container my-10">
       <h2 className="my-6 text-2xl font-semibold text-white">
         All the episodes:
       </h2>
@@ -19,7 +19,7 @@ const EpisodesPage = async () => {
       <EpisodeItems page={page || "1"} />
 
       <PaginationItem lenght={3} href={"episode"} />
-    </div>
+    </section>
   );
 };
 

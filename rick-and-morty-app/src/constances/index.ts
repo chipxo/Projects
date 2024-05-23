@@ -6,7 +6,7 @@ export const navLinks = [
   },
   {
     id: 2,
-    href: "/characters",
+    href: "/character",
     name: "Characters",
   },
   {
@@ -15,3 +15,7 @@ export const navLinks = [
     name: "Locations",
   },
 ];
+
+export const genders: Gender[] = ["Female", "Male", "Genderless", "Unknown"];
+
+export const statuses: Status[] = ["Alive", "Dead", "Unknown"];

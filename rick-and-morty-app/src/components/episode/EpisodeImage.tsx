@@ -8,7 +8,7 @@ type EpisodeImageProps = {
 
 const EpisodeImage = ({ episode }: EpisodeImageProps) => {
   return (
-    <div className="relative flex max-h-[180px] gap-4 self-center overflow-hidden rounded-sm p-2">
+    <div className="relative flex max-h-[190px] gap-4 self-center overflow-hidden rounded-sm p-2">
       <Image
         src={defaultImage}
         alt={"defaultImage"}
