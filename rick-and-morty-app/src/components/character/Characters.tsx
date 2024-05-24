@@ -30,77 +30,63 @@ const Characters = () => {
   const nameParams = `name=${search}`;
   const statusParams = `status=${statusSearch}`;
 
+  const handleSearchCharacter = (val: string) => {
+    router.push(val);
+    setQuery(val);
+  };
+
   const handleInputChange = (val: string) => {
     setSearch(val);
 
-    if (!statusSearch && !genderSearch) {
-      router.push(`${BASE_URL}?name=${val}`);
-      setQuery(`${BASE_URL}?name=${val}`);
-    }
+    if (!statusSearch && !genderSearch)
+      handleSearchCharacter(`${BASE_URL}?name=${val}`);
 
-    if (val && genderSearch) {
-      router.push(`${BASE_URL}?name=${val}&${genderParams}`);
-      setQuery(`${BASE_URL}?name=${val}&${genderParams}`);
-    }
+    if (val && genderSearch)
+      handleSearchCharacter(`${BASE_URL}?name=${val}&${genderParams}`);
 
-    if (val && statusSearch) {
-      router.push(`${BASE_URL}?name=${val}&${statusParams}`);
-      setQuery(`${BASE_URL}?name=${val}&${statusParams}`);
-    }
+    if (val && statusSearch)
+      handleSearchCharacter(`${BASE_URL}?name=${val}&${statusParams}`);
 
-    if (val && genderSearch && statusSearch) {
-      router.push(`${BASE_URL}?name=${val}&${genderParams}&${statusParams}`);
-      setQuery(`${BASE_URL}?name=${val}&${genderParams}&${statusParams}`);
-    }
+    if (val && genderSearch && statusSearch)
+      handleSearchCharacter(
+        `${BASE_URL}?name=${val}&${genderParams}&${statusParams}`,
+      );
   };
 
   const handleGenderFilter = (gender: Gender) => {
-    if (!statusSearch && !search) {
-      router.push(`${BASE_URL}?gender=${gender}`);
-      setQuery(`${BASE_URL}?gender=${gender}`);
-    }
+    if (!statusSearch && !search)
+      handleSearchCharacter(`${BASE_URL}?gender=${gender}`);
 
-    if (gender && statusSearch) {
-      router.push(`${BASE_URL}?gender=${gender}&${statusParams}`);
-      setQuery(`${BASE_URL}?gender=${gender}&${statusParams}`);
-    }
+    if (gender && statusSearch)
+      handleSearchCharacter(`${BASE_URL}?gender=${gender}&${statusParams}`);
 
-    if (gender && search) {
-      router.push(`${BASE_URL}?gender=${gender}&${nameParams}`);
-      setQuery(`${BASE_URL}?gender=${gender}&${nameParams}`);
-    }
+    if (gender && search)
+      handleSearchCharacter(`${BASE_URL}?gender=${gender}&${nameParams}`);
 
-    if (gender && statusSearch && search) {
-      router.push(`${BASE_URL}?gender=${gender}&${statusParams}&${nameParams}`);
-      setQuery(`${BASE_URL}?gender=${gender}&${statusParams}&${nameParams}`);
-    }
+    if (gender && statusSearch && search)
+      handleSearchCharacter(
+        `${BASE_URL}?gender=${gender}&${statusParams}&${nameParams}`,
+      );
   };
 
   const handleStatusFilter = (status: Status) => {
-    if (!genderSearch && !search) {
-      router.push(`${BASE_URL}?status=${status}`);
-      setQuery(`${BASE_URL}?status=${status}`);
-    }
+    if (!genderSearch && !search)
+      handleSearchCharacter(`${BASE_URL}?status=${status}`);
 
-    if (status && genderSearch) {
-      router.push(`${BASE_URL}?status=${status}&${genderParams}`);
-      setQuery(`${BASE_URL}?status=${status}&${genderParams}`);
-    }
+    if (status && genderSearch)
+      handleSearchCharacter(`${BASE_URL}?status=${status}&${genderParams}`);
 
-    if (status && search) {
-      router.push(`${BASE_URL}?status=${status}&${nameParams}`);
-      setQuery(`${BASE_URL}?status=${status}&${nameParams}`);
-    }
+    if (status && search)
+      handleSearchCharacter(`${BASE_URL}?status=${status}&${nameParams}`);
 
-    if (status && search && genderSearch) {
-      router.push(`${BASE_URL}?status=${status}&${nameParams}&${genderParams}`);
-      setQuery(`${BASE_URL}?status=${status}&${nameParams}&${genderParams}`);
-    }
+    if (status && search && genderSearch)
+      handleSearchCharacter(
+        `${BASE_URL}?status=${status}&${nameParams}&${genderParams}`,
+      );
   };
 
   const reset = () => {
-    router.push(BASE_URL);
-    setQuery(BASE_URL);
+    handleSearchCharacter(BASE_URL);
     setSearch("");
   };
 
@@ -161,7 +147,11 @@ const Characters = () => {
           </Button>
         </div>
 
-        {isLoading ? <Spinner /> : <CharacterItems characters={data} />}
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          !error && <CharacterItems characters={data} />
+        )}
 
         {error && (
           <h2 className="text-center text-2xl font-semibold">
