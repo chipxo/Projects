@@ -14,21 +14,23 @@ const EpisodeCharactersItem = ({
 
   return (
     <div>
-      {episodeCharacters?.map(({ id, name }, i) =>
-        showAllCharacters ? (
-          <span key={id}>
-            {name}
-            {i === episodeCharacters.length - 1 ? "" : ", "}
-          </span>
-        ) : (
-          i < 3 && (
+      <div className="overflow-auto max-md:max-h-[30vh]">
+        {episodeCharacters?.map(({ id, name }, i) =>
+          showAllCharacters ? (
             <span key={id}>
               {name}
-              {i < 2 && ", "}
+              {i === episodeCharacters.length - 1 ? "" : ", "}
             </span>
-          )
-        ),
-      )}
+          ) : (
+            i < 3 && (
+              <span key={id}>
+                {name}
+                {i < 2 && ", "}
+              </span>
+            )
+          ),
+        )}
+      </div>
 
       <Button
         onClick={() => setShowAllCharacters((prev) => !prev)}

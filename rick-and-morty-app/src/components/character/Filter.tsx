@@ -4,7 +4,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import React from "react";
+import React, { Suspense } from "react";
+import Spinner from "../Spinner";
 
 type FilterProps = {
   title: string;
@@ -13,12 +14,14 @@ type FilterProps = {
 
 const Filter = ({ title, children }: FilterProps) => {
   return (
-    <Accordion type="single" collapsible>
-      <AccordionItem value="item-1">
-        <AccordionTrigger>{title}</AccordionTrigger>
-        <AccordionContent className="space-y-2">{children}</AccordionContent>
-      </AccordionItem>
-    </Accordion>
+    <Suspense fallback={<Spinner />}>
+      <Accordion type="single" collapsible>
+        <AccordionItem value="item-1">
+          <AccordionTrigger>{title}</AccordionTrigger>
+          <AccordionContent className="space-y-2">{children}</AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </Suspense>
   );
 };
 

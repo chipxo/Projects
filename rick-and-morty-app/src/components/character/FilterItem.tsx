@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
-import React from "react";
+import React, { Suspense } from "react";
+import Spinner from "../Spinner";
 
 type FilterItemProps = {
   item: Gender | Status;
@@ -9,15 +10,17 @@ type FilterItemProps = {
 
 const FilterItem = ({ item, searchParam, onClick }: FilterItemProps) => {
   return (
-    <div
-      onClick={onClick}
-      className={cn(
-        "cursor-pointer rounded-md px-3 py-1.5 transition-colors hover:bg-primary/40",
-        searchParam === item ? "bg-primary" : "",
-      )}
-    >
-      {item}
-    </div>
+    <Suspense fallback={<Spinner />}>
+      <div
+        onClick={onClick}
+        className={cn(
+          "cursor-pointer rounded-md px-3 py-1.5 transition-colors hover:bg-primary/40",
+          searchParam === item ? "bg-primary" : "",
+        )}
+      >
+        {item}
+      </div>
+    </Suspense>
   );
 };
 

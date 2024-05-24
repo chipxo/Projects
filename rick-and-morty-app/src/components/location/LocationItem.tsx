@@ -11,15 +11,17 @@ import defaultLocationImage from "@public/rick-and-morty-dimension.jpg";
 
 const LocationItem = ({ name, type, dimension }: LocationType) => {
   return (
-    <div className="my-2 grid rounded-md bg-accent/60 p-2">
+    <div className="my-2 grid rounded-md border bg-accent/80 p-2">
       <Dialog>
         <DialogTrigger className="w-full text-start">
           <div className="grid gap-4 sm:grid-cols-[0.4fr,_1fr]">
-            <Image
-              src={defaultLocationImage}
-              alt={"default location image"}
-              className="h-full rounded-md object-cover"
-            />
+            <div className="rounded-md border">
+              <Image
+                src={defaultLocationImage}
+                alt={"default location image"}
+                className="h-full rounded-md object-cover"
+              />
+            </div>
 
             <div className="flex flex-col p-2">
               <p className="font-bold lg:text-2xl">{name}</p>
