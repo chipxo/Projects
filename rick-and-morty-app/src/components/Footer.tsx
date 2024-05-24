@@ -23,7 +23,7 @@ const Footer = () => {
               </li>
               <li>
                 <p>
-                  Tech stack I've used: Next.js, TypeScript, TailwindCSS,
+                  Tech stack I&apos;ve used: Next.js, TypeScript, TailwindCSS,
                   Shadcn/ui, Axios
                 </p>
               </li>
