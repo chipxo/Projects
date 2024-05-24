@@ -56,20 +56,16 @@ const LocationsPage = () => {
             </h2>
 
             <AnimatePresence>
-              {loading ? (
-                <Spinner />
-              ) : (
-                locations?.map((location) => (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    key={location.id}
-                  >
-                    <LocationItem {...location} />
-                  </motion.div>
-                ))
-              )}
+              {locations?.map((location) => (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  key={location.id}
+                >
+                  <LocationItem {...location} />
+                </motion.div>
+              ))}
             </AnimatePresence>
 
             {error && <p>Error: {error.message}</p>}

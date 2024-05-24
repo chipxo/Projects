@@ -162,7 +162,7 @@ const CharachtersPage = () => {
           </Button>
         </div>
 
-        {isLoading ? <Spinner /> : <CharacterItems characters={data} />}
+        <CharacterItems characters={data} />
 
         {error && (
           <h2 className="text-center text-2xl font-semibold">
