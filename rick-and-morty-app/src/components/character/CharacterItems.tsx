@@ -1,5 +1,7 @@
-import React from "react";
+import React, { Suspense } from "react";
 import CharacterItem from "./CharacterItem";
+import Spinner from "../Spinner";
+import { AnimatePresence, motion } from "framer-motion";
 
 type CharacterItemsProps = {
   characters: Character[];
@@ -7,11 +9,25 @@ type CharacterItemsProps = {
 
 const CharacterItems = ({ characters }: CharacterItemsProps) => {
   return (
-    <div className="grid grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-4 ">
-      {characters?.map((character) => (
-        <CharacterItem key={character.id} {...character} />
-      ))}
-    </div>
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="grid grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))] gap-4 "
+      >
+        {characters?.map((character) => (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            key={character.id}
+          >
+            <CharacterItem {...character} />
+          </motion.div>
+        ))}
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

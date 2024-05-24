@@ -1,24 +1,33 @@
-"use client";
-
 import React from "react";
-import EpisodeItems from "@/components/episode/EpisodeItems";
-import { useSearchParams } from "next/navigation";
 import PaginationItem from "@/components/PaginationItem";
+import { useFetch } from "@/lib/utils";
+import EpisodeItem from "@/components/episode/EpisodeItem";
 
-const EpisodesPage = async () => {
-  const searchParams = useSearchParams();
+type EpisodesPageProps = {
+  params: string;
+  searchParams: {
+    page: string;
+  };
+};
 
-  const page = searchParams.get("page");
+const EpisodesPage = async ({ searchParams }: EpisodesPageProps) => {
+  const { results } = await useFetch(
+    `episode?page=${searchParams.page || "1"}`,
+  );
+
+  const episodes: Episode[] = results;
 
   return (
-    <section className="container my-10">
+    <section className="container my-4 min-h-[85vh] md:my-10">
       <h2 className="my-6 text-2xl font-semibold text-white">
         All the episodes:
       </h2>
 
-      <EpisodeItems page={page || "1"} />
+      {episodes?.map((episode) => (
+        <EpisodeItem key={episode.id} {...episode} />
+      ))}
 
-      <PaginationItem lenght={3} href={"episode"} />
+      <PaginationItem paginationLength={3} href={"episode"} />
     </section>
   );
 };

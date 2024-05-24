@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["rickandmortyapi.com"],
+    domains: [
+      "rickandmortyapi.com",
+      "rickandmorty.fandom.com",
+      "static.wikia.nocookie.net",
+    ],
   },
 };
 

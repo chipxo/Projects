@@ -12,10 +12,10 @@ const EpisodeImage = ({ episode }: EpisodeImageProps) => {
       <Image
         src={defaultImage}
         alt={"defaultImage"}
-        className="my-auto object-cover blur-md"
+        className="my-auto h-full object-cover blur-md"
       />
 
-      <p className="absolute inset-0 flex items-center justify-center text-lg font-semibold text-white">
+      <p className="absolute inset-0 flex items-center justify-center font-semibold text-white md:text-lg">
         {formatEpisode(episode)}
       </p>
     </div>

@@ -2,45 +2,37 @@
 
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
+
+type EpisodeCharactersItemProps = {
+  episodeCharacters: Character[];
+};
 
 const EpisodeCharactersItem = ({
   episodeCharacters,
-}: {
-  episodeCharacters: Character[];
-}) => {
+}: EpisodeCharactersItemProps) => {
   const [showAllCharacters, setShowAllCharacters] = useState(false);
 
   return (
     <div>
-      <div>
-        {!showAllCharacters &&
-          episodeCharacters.map(
-            ({ id, name }, i: number) =>
-              i < 3 && (
-                <span key={id} className="">
-                  {name}
-                  {i < 2 && ", "}
-                </span>
-              ),
-          )}
-      </div>
-
-      <div>
-        {episodeCharacters.map(
-          ({ id, name }, i: number) =>
-            showAllCharacters && (
-              <span key={id}>
-                {name}
-                {i === episodeCharacters.length - 1 ? "" : ", "}
-              </span>
-            ),
-        )}
-      </div>
+      {episodeCharacters?.map(({ id, name }, i) =>
+        showAllCharacters ? (
+          <span key={id}>
+            {name}
+            {i === episodeCharacters.length - 1 ? "" : ", "}
+          </span>
+        ) : (
+          i < 3 && (
+            <span key={id}>
+              {name}
+              {i < 2 && ", "}
+            </span>
+          )
+        ),
+      )}
 
       <Button
         onClick={() => setShowAllCharacters((prev) => !prev)}
-        className="mt-6"
+        className="mt-3 md:mt-6"
       >
         {showAllCharacters ? "Close" : "Show all"}
       </Button>

@@ -1,13 +1,14 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
-import { Input } from "@/components/ui/input";
-import CharacterItems from "@/components/character/CharacterItems";
-import { cn, useClientFetch } from "@/lib/utils";
-import PaginationItem from "@/components/PaginationItem";
+import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import CharacterItems from "@/components/character/CharacterItems";
+import { useClientFetch } from "@/lib/useClientFetch";
+import PaginationItem from "@/components/PaginationItem";
 import { genders, statuses } from "@/constances";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import Filter from "@/components/character/Filter";
 import FilterItem from "@/components/character/FilterItem";
 import Spinner from "@/components/Spinner";
@@ -25,9 +26,9 @@ const CharachtersPage = () => {
   const genderSearch = searchParams.get("gender");
   const statusSearch = searchParams.get("status");
 
-  const pushGender = `gender=${genderSearch}`;
-  const pushName = `name=${search}`;
-  const pushStatus = `status=${statusSearch}`;
+  const genderParams = `gender=${genderSearch}`;
+  const nameParams = `name=${search}`;
+  const statusParams = `status=${statusSearch}`;
 
   const handleInputChange = (val: string) => {
     setSearch(val);
@@ -38,18 +39,18 @@ const CharachtersPage = () => {
     }
 
     if (val && genderSearch) {
-      router.push(`${BASE_URL}?name=${val}&${pushGender}`);
-      setQuery(`${BASE_URL}?name=${val}&${pushGender}`);
+      router.push(`${BASE_URL}?name=${val}&${genderParams}`);
+      setQuery(`${BASE_URL}?name=${val}&${genderParams}`);
     }
 
     if (val && statusSearch) {
-      router.push(`${BASE_URL}?name=${val}&${pushStatus}`);
-      setQuery(`${BASE_URL}?name=${val}&${pushStatus}`);
+      router.push(`${BASE_URL}?name=${val}&${statusParams}`);
+      setQuery(`${BASE_URL}?name=${val}&${statusParams}`);
     }
 
     if (val && genderSearch && statusSearch) {
-      router.push(`${BASE_URL}?name=${val}&${pushGender}&${pushStatus}`);
-      setQuery(`${BASE_URL}?name=${val}&${pushGender}&${pushStatus}`);
+      router.push(`${BASE_URL}?name=${val}&${genderParams}&${statusParams}`);
+      setQuery(`${BASE_URL}?name=${val}&${genderParams}&${statusParams}`);
     }
   };
 
@@ -60,18 +61,18 @@ const CharachtersPage = () => {
     }
 
     if (gender && statusSearch) {
-      router.push(`${BASE_URL}?gender=${gender}&${pushStatus}`);
-      setQuery(`${BASE_URL}?gender=${gender}&${pushStatus}`);
+      router.push(`${BASE_URL}?gender=${gender}&${statusParams}`);
+      setQuery(`${BASE_URL}?gender=${gender}&${statusParams}`);
     }
 
     if (gender && search) {
-      router.push(`${BASE_URL}?gender=${gender}&${pushName}`);
-      setQuery(`${BASE_URL}?gender=${gender}&${pushName}`);
+      router.push(`${BASE_URL}?gender=${gender}&${nameParams}`);
+      setQuery(`${BASE_URL}?gender=${gender}&${nameParams}`);
     }
 
     if (gender && statusSearch && search) {
-      router.push(`${BASE_URL}?gender=${gender}&${pushStatus}&${pushName}`);
-      setQuery(`${BASE_URL}?gender=${gender}&${pushStatus}&${pushName}`);
+      router.push(`${BASE_URL}?gender=${gender}&${statusParams}&${nameParams}`);
+      setQuery(`${BASE_URL}?gender=${gender}&${statusParams}&${nameParams}`);
     }
   };
 
@@ -82,18 +83,18 @@ const CharachtersPage = () => {
     }
 
     if (status && genderSearch) {
-      router.push(`${BASE_URL}?status=${status}&${pushGender}`);
-      setQuery(`${BASE_URL}?status=${status}&${pushGender}`);
+      router.push(`${BASE_URL}?status=${status}&${genderParams}`);
+      setQuery(`${BASE_URL}?status=${status}&${genderParams}`);
     }
 
     if (status && search) {
-      router.push(`${BASE_URL}?status=${status}&${pushName}`);
-      setQuery(`${BASE_URL}?status=${status}&${pushName}`);
+      router.push(`${BASE_URL}?status=${status}&${nameParams}`);
+      setQuery(`${BASE_URL}?status=${status}&${nameParams}`);
     }
 
     if (status && search && genderSearch) {
-      router.push(`${BASE_URL}?status=${status}&${pushName}&${pushGender}`);
-      setQuery(`${BASE_URL}?status=${status}&${pushName}&${pushGender}`);
+      router.push(`${BASE_URL}?status=${status}&${nameParams}&${genderParams}`);
+      setQuery(`${BASE_URL}?status=${status}&${nameParams}&${genderParams}`);
     }
   };
 
@@ -111,22 +112,28 @@ const CharachtersPage = () => {
   }, [page]);
 
   return (
-    <section className="min-h-[85vh] bg-background/80">
-      <div className="container rounded-b  py-4">
-        <div className="mb-8 space-y-2">
-          <h2 className="text-center text-2xl font-bold">Search</h2>
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="min-h-[85vh] bg-background/20"
+    >
+      <div className="container rounded-b py-4">
+        <div className="space-y-2 md:mb-8">
+          <h2 className="text-center text-lg font-bold md:text-2xl">Search</h2>
 
           <Input
             type="text"
             placeholder="Enter the charachter name"
+            className="bg-background/80"
             value={search}
             onChange={(e) => handleInputChange(e.target.value)}
           />
         </div>
-        <div className="mb-4 flex gap-4">
-          <p className="inline-flex h-[35px] items-center">Filter by </p>
+        <div className="mb-4 flex gap-4 max-sm:flex-col">
+          <p className="inline-flex h-[35px] items-center">Filter by</p>
 
-          <Filter title="Genders">
+          <Filter title="Gender">
             {genders.map((gender) => (
               <FilterItem
                 key={gender}
@@ -137,7 +144,7 @@ const CharachtersPage = () => {
             ))}
           </Filter>
 
-          <Filter title="Statuses">
+          <Filter title="Status">
             {statuses.map((status) => (
               <FilterItem
                 key={status}
@@ -153,25 +160,19 @@ const CharachtersPage = () => {
           </Button>
         </div>
 
+        {isLoading ? <Spinner /> : <CharacterItems characters={data} />}
+
         {error && (
           <h2 className="text-center text-2xl font-semibold">
             Character is not found!
           </h2>
         )}
 
-        {!error && (
-          <Suspense fallback={<Spinner />}>
-            <CharacterItems characters={data} />
-          </Suspense>
-        )}
-
         {!isLoading && !error && !search && !genderSearch && !statusSearch && (
-          <div className="mt-4">
-            <PaginationItem lenght={42} href="character" />
-          </div>
+          <PaginationItem paginationLength={42} href="character" />
         )}
       </div>
-    </section>
+    </motion.section>
   );
 };
 

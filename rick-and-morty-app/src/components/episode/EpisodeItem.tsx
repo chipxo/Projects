@@ -21,15 +21,13 @@ const EpisodeItem = async ({
     return parseInt(parts[parts.length - 1]);
   });
 
-  const episodeCharacters: Character[] = await useFetch(
-    `character/${charactersUrls}`,
-  );
+  const episodeCharacters = await useFetch(`character/${charactersUrls}`);
 
   return (
-    <div className="my-2 grid rounded-md border bg-accent/90 p-2">
+    <div className="my-2 grid rounded-md bg-accent/60 sm:p-2">
       <Dialog>
         <DialogTrigger className="w-full text-start">
-          <div className="grid grid-cols-[0.4fr,_1fr] gap-4">
+          <div className="grid gap-4 sm:grid-cols-[0.4fr,_1fr]">
             <EpisodeImage episode={episode} />
 
             <div className="flex flex-col p-2">
@@ -38,12 +36,11 @@ const EpisodeItem = async ({
             </div>
           </div>
         </DialogTrigger>
+
         <DialogContent>
-          <DialogHeader className="grid grid-cols-2 p-2">
-            <div className="p-4">
-              <DialogTitle>
-                <h2 className="text-2xl">{name}</h2>
-              </DialogTitle>
+          <div className="grid p-2 sm:grid-cols-2">
+            <DialogHeader className="p-4">
+              <DialogTitle className="text-2xl">{name}</DialogTitle>
 
               <DialogDescription>
                 <p className="my-2">Air date: {air_date}</p>
@@ -51,10 +48,12 @@ const EpisodeItem = async ({
 
                 <EpisodeCharacterItem episodeCharacters={episodeCharacters} />
               </DialogDescription>
-            </div>
+            </DialogHeader>
 
-            <EpisodeImage episode={episode} />
-          </DialogHeader>
+            <div className="pt-2 max-sm:order-[-1]">
+              <EpisodeImage episode={episode} />
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
     </div>

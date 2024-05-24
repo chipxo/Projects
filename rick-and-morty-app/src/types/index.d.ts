@@ -19,7 +19,7 @@ declare type Character = {
   created: string;
 };
 
-declare type Location = {
+declare type LocationType = {
   id: number;
   name: string;
   type: string;

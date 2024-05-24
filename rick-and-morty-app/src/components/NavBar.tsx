@@ -5,21 +5,13 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import BG from "@public/nav-bg.jpg";
-import Image from "next/image";
 
 const NavBar = () => {
   const activeLink = usePathname();
 
   return (
-    <nav className="sticky top-0 z-10 overflow-hidden ">
-      <ul className="container grid grid-cols-3 bg-black/40 py-2.5 text-center text-lg font-semibold">
-        <Image
-          src={BG}
-          alt={""}
-          className="absolute inset-0 -z-10 h-full object-cover"
-        />
-
+    <nav className="w-full bg-background/50 backdrop-blur-md">
+      <ul className="container grid grid-cols-3 py-1.5 text-center font-semibold sm:py-2.5 sm:text-lg">
         {navLinks.map(({ id, href, name }) => (
           <Link
             key={id}

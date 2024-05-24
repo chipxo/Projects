@@ -11,7 +11,7 @@ export const navLinks = [
   },
   {
     id: 3,
-    href: "/locations",
+    href: "/location",
     name: "Locations",
   },
 ];
