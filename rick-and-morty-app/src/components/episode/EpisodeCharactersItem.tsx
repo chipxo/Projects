@@ -14,7 +14,7 @@ const EpisodeCharactersItem = ({
 
   return (
     <div>
-      <div className="max-h-[40vh] overflow-auto">
+      <div className="overflow-auto max-md:max-h-[30vh]">
         {episodeCharacters?.map(({ id, name }, i) =>
           showAllCharacters ? (
             <span key={id}>

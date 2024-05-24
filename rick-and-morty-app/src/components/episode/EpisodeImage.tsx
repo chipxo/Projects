@@ -13,7 +13,7 @@ const EpisodeImage = ({ episode }: EpisodeImageProps) => {
         <Image
           src={defaultImage}
           alt={"defaultImage"}
-          className="my-auto h-full object-cover blur-sm"
+          className="h-full object-cover blur-sm"
         />
       </div>
 
