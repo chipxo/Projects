@@ -2,7 +2,7 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { gql, useQuery, ApolloProvider } from "@apollo/client";
 import { client } from "@/lib/client";
 import Spinner from "@/components/Spinner";
@@ -10,6 +10,7 @@ import LocationItem from "@/components/location/LocationItem";
 import PaginationItem from "@/components/PaginationItem";
 
 const LocationsPage = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const page = searchParams.get("page");
 
@@ -41,8 +42,8 @@ const LocationsPage = () => {
   }, [data]);
 
   return (
-    <Suspense fallback={<Spinner />}>
-      <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
+      <Suspense fallback={<Spinner />}>
         <motion.section
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -78,8 +79,8 @@ const LocationsPage = () => {
             )}
           </div>
         </motion.section>
-      </ApolloProvider>
-    </Suspense>
+      </Suspense>
+    </ApolloProvider>
   );
 };
 
