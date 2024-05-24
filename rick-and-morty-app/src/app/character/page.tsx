@@ -112,30 +112,28 @@ const CharachtersPage = () => {
   }, [page]);
 
   return (
-    <Suspense fallback={<Spinner />}>
-      <motion.section
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="min-h-[85vh] bg-background/20"
-      >
-        <div className="container rounded-b py-4">
-          <div className="space-y-2 md:mb-8">
-            <h2 className="text-center text-lg font-bold md:text-2xl">
-              Search
-            </h2>
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="min-h-[85vh] bg-background/20"
+    >
+      <div className="container rounded-b py-4">
+        <div className="space-y-2 md:mb-8">
+          <h2 className="text-center text-lg font-bold md:text-2xl">Search</h2>
 
-            <Input
-              type="text"
-              placeholder="Enter the charachter name"
-              className="bg-background/80"
-              value={search}
-              onChange={(e) => handleInputChange(e.target.value)}
-            />
-          </div>
-          <div className="mb-4 flex gap-4 max-sm:flex-col">
-            <p className="inline-flex h-[35px] items-center">Filter by</p>
+          <Input
+            type="text"
+            placeholder="Enter the charachter name"
+            className="bg-background/80"
+            value={search}
+            onChange={(e) => handleInputChange(e.target.value)}
+          />
+        </div>
+        <div className="mb-4 flex gap-4 max-sm:flex-col">
+          <p className="inline-flex h-[35px] items-center">Filter by</p>
 
+          <Suspense fallback={<Spinner />}>
             <Filter title="Gender">
               {genders.map((gender) => (
                 <FilterItem
@@ -157,30 +155,26 @@ const CharachtersPage = () => {
                 />
               ))}
             </Filter>
+          </Suspense>
 
-            <Button variant="destructive" onClick={reset}>
-              Reset
-            </Button>
-          </div>
-
-          {isLoading ? <Spinner /> : <CharacterItems characters={data} />}
-
-          {error && (
-            <h2 className="text-center text-2xl font-semibold">
-              Character is not found!
-            </h2>
-          )}
-
-          {!isLoading &&
-            !error &&
-            !search &&
-            !genderSearch &&
-            !statusSearch && (
-              <PaginationItem paginationLength={42} href="character" />
-            )}
+          <Button variant="destructive" onClick={reset}>
+            Reset
+          </Button>
         </div>
-      </motion.section>
-    </Suspense>
+
+        {isLoading ? <Spinner /> : <CharacterItems characters={data} />}
+
+        {error && (
+          <h2 className="text-center text-2xl font-semibold">
+            Character is not found!
+          </h2>
+        )}
+
+        {!isLoading && !error && !search && !genderSearch && !statusSearch && (
+          <PaginationItem paginationLength={42} href="character" />
+        )}
+      </div>
+    </motion.section>
   );
 };
 
