@@ -149,14 +149,12 @@ const Characters = () => {
 
         {isLoading ? (
           <Spinner />
-        ) : (
-          !error && <CharacterItems characters={data} />
-        )}
-
-        {error && (
+        ) : error ? (
           <h2 className="text-center text-2xl font-semibold">
             Character is not found!
           </h2>
+        ) : (
+          <CharacterItems characters={data} />
         )}
 
         {!isLoading && !error && !search && !genderSearch && !statusSearch && (
