@@ -1,6 +1,5 @@
-import axios, { Axios, AxiosError, AxiosResponse, isAxiosError } from "axios";
+import axios, { isAxiosError } from "axios";
 import { type ClassValue, clsx } from "clsx";
-import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -23,12 +22,11 @@ export async function useFetch(query: string) {
   }
 }
 
-export function formatEpisode(episodeCode: string) {
+export const formatEpisode = (episodeCode: string) => {
   const [season, episode] = episodeCode.slice(1).split("E");
 
-  const seasonNumber = season.replace("0", "");
+  const number = (fragment: string) =>
+    fragment[0] === "0" ? fragment[1] : fragment;
 
-  const episodeNumber = episode.replace("0", "");
-
-  return `Season ${seasonNumber} Episode ${episodeNumber}`;
-}
+  return `Season ${number(season)} Episode ${number(episode)}`;
+};
