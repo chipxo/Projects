@@ -1,6 +1,5 @@
-import React, { Suspense } from "react";
+import React from "react";
 import CharacterItem from "./CharacterItem";
-import Spinner from "../Spinner";
 import { AnimatePresence, motion } from "framer-motion";
 
 type CharacterItemsProps = {
@@ -14,7 +13,7 @@ const CharacterItems = ({ characters }: CharacterItemsProps) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="grid grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))] gap-4 "
+        className="grid grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))] gap-4"
       >
         {characters?.map((character) => (
           <motion.div

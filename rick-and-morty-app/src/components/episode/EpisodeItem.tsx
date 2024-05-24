@@ -24,7 +24,7 @@ const EpisodeItem = async ({
   const episodeCharacters = await useFetch(`character/${charactersUrls}`);
 
   return (
-    <div className="my-2 grid rounded-md bg-accent/60 sm:p-2">
+    <div className="my-2 grid rounded-md border bg-accent/80 sm:p-2 ">
       <Dialog>
         <DialogTrigger className="w-full text-start">
           <div className="grid gap-4 sm:grid-cols-[0.4fr,_1fr]">
