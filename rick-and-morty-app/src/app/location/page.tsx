@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { gql, useQuery, ApolloProvider } from "@apollo/client";
 import { client } from "@/lib/client";
 import Spinner from "@/components/Spinner";
@@ -10,7 +10,6 @@ import LocationItem from "@/components/location/LocationItem";
 import PaginationItem from "@/components/PaginationItem";
 
 const LocationsPage = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const page = searchParams.get("page");
 
@@ -43,20 +42,22 @@ const LocationsPage = () => {
 
   return (
     <ApolloProvider client={client}>
-      <Suspense fallback={<Spinner />}>
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="min-h-[85vh]"
-        >
-          <div className="container py-4">
-            <h2 className="text-center text-xl font-semibold lg:text-2xl">
-              Locations
-            </h2>
+      <motion.section
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="min-h-[85vh]"
+      >
+        <div className="container py-4">
+          <h2 className="text-center text-xl font-semibold lg:text-2xl">
+            Locations
+          </h2>
 
-            <AnimatePresence>
-              {locations?.map((location) => (
+          <AnimatePresence>
+            {loading ? (
+              <Spinner />
+            ) : (
+              locations?.map((location) => (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -65,17 +66,17 @@ const LocationsPage = () => {
                 >
                   <LocationItem {...location} />
                 </motion.div>
-              ))}
-            </AnimatePresence>
-
-            {error && <p>Error: {error.message}</p>}
-
-            {!loading && (
-              <PaginationItem paginationLength={7} href={"location"} />
+              ))
             )}
-          </div>
-        </motion.section>
-      </Suspense>
+          </AnimatePresence>
+
+          {error && <p>Error: {error.message}</p>}
+
+          {!loading && (
+            <PaginationItem paginationLength={7} href={"location"} />
+          )}
+        </div>
+      </motion.section>
     </ApolloProvider>
   );
 };

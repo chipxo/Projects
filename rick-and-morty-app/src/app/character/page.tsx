@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import CharacterItems from "@/components/character/CharacterItems";
@@ -130,39 +130,38 @@ const CharachtersPage = () => {
             onChange={(e) => handleInputChange(e.target.value)}
           />
         </div>
+
         <div className="mb-4 flex gap-4 max-sm:flex-col">
           <p className="inline-flex h-[35px] items-center">Filter by</p>
 
-          <Suspense fallback={<Spinner />}>
-            <Filter title="Gender">
-              {genders.map((gender) => (
-                <FilterItem
-                  key={gender}
-                  item={gender}
-                  searchParam={genderSearch}
-                  onClick={() => handleGenderFilter(gender)}
-                />
-              ))}
-            </Filter>
+          <Filter title="Gender">
+            {genders.map((gender) => (
+              <FilterItem
+                key={gender}
+                item={gender}
+                searchParam={genderSearch}
+                onClick={() => handleGenderFilter(gender)}
+              />
+            ))}
+          </Filter>
 
-            <Filter title="Status">
-              {statuses.map((status) => (
-                <FilterItem
-                  key={status}
-                  item={status}
-                  searchParam={statusSearch}
-                  onClick={() => handleStatusFilter(status)}
-                />
-              ))}
-            </Filter>
-          </Suspense>
+          <Filter title="Status">
+            {statuses.map((status) => (
+              <FilterItem
+                key={status}
+                item={status}
+                searchParam={statusSearch}
+                onClick={() => handleStatusFilter(status)}
+              />
+            ))}
+          </Filter>
 
           <Button variant="destructive" onClick={reset}>
             Reset
           </Button>
         </div>
 
-        <CharacterItems characters={data} />
+        {isLoading ? <Spinner /> : <CharacterItems characters={data} />}
 
         {error && (
           <h2 className="text-center text-2xl font-semibold">

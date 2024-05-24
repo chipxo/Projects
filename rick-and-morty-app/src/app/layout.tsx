@@ -7,6 +7,8 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import Image from "next/image";
 import BG from "@public/bg-img.jpg";
 import Footer from "@/components/Footer";
+import { Suspense } from "react";
+import Spinner from "@/components/Spinner";
 
 const ibm = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -41,8 +43,7 @@ export default function RootLayout({
           <header className="sticky top-0 z-10">
             <NavBar />
           </header>
-
-          {children}
+          <Suspense fallback={<Spinner />}>{children}</Suspense>
 
           <div className="fixed bottom-4 right-4 z-[10]">
             <ThemeToggle />
