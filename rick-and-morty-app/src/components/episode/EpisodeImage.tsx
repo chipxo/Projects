@@ -1,6 +1,6 @@
 import { formatEpisode } from "@/lib/utils";
 import Image from "next/image";
-import defaultImage from "@public/rick-and-morty.jpg";
+import defaultImage from "@public/ricka-and-morty-episode-img.jpg";
 
 type EpisodeImageProps = {
   episode: string;
