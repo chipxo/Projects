@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import Filter from "@/components/character/Filter";
 import FilterItem from "@/components/character/FilterItem";
 import Spinner from "@/components/Spinner";
+import { debounce } from "@/lib/utils";
 
 const Characters = () => {
   const BASE_URL = "character";
@@ -23,66 +24,52 @@ const Characters = () => {
   const searchParams = useSearchParams();
 
   const page = searchParams.get("page");
-  const genderSearch = searchParams.get("gender");
-  const statusSearch = searchParams.get("status");
+  const genderSearch = searchParams.get("gender") as Gender | null;
+  const statusSearch = searchParams.get("status") as Status | null;
 
-  const genderParams = `gender=${genderSearch}`;
-  const nameParams = `name=${search}`;
-  const statusParams = `status=${statusSearch}`;
+  const buildQuery = (
+    name: string | null,
+    gender: Gender | null,
+    status: Status | null,
+  ) => {
+    const params = new URLSearchParams();
 
-  const handleSearchCharacter = (val: string) => {
-    router.push(val);
-    setQuery(val);
+    if (name) params.append("name", name);
+    if (gender) params.append("gender", gender);
+    if (status) params.append("status", status);
+
+    return `${BASE_URL}?${params.toString()}`;
+  };
+
+  const handleSearchCharacter = (query: string) => {
+    router.push(query);
+    setQuery(query);
   };
 
   const handleInputChange = (val: string) => {
     setSearch(val);
 
-    if (!statusSearch && !genderSearch)
-      handleSearchCharacter(`${BASE_URL}?name=${val}`);
+    const debouncedSearchCharacter = debounce((val: string) => {
+      handleSearchCharacter(buildQuery(val, genderSearch, statusSearch));
+    }, 300);
 
-    if (val && genderSearch)
-      handleSearchCharacter(`${BASE_URL}?name=${val}&${genderParams}`);
-
-    if (val && statusSearch)
-      handleSearchCharacter(`${BASE_URL}?name=${val}&${statusParams}`);
-
-    if (val && genderSearch && statusSearch)
-      handleSearchCharacter(
-        `${BASE_URL}?name=${val}&${genderParams}&${statusParams}`,
-      );
+    debouncedSearchCharacter(val);
   };
 
   const handleGenderFilter = (gender: Gender) => {
-    if (!statusSearch && !search)
-      handleSearchCharacter(`${BASE_URL}?gender=${gender}`);
+    const debouncedGenderFilter = debounce((gender: Gender) => {
+      handleSearchCharacter(buildQuery(search, gender, statusSearch));
+    }, 300);
 
-    if (gender && statusSearch)
-      handleSearchCharacter(`${BASE_URL}?gender=${gender}&${statusParams}`);
-
-    if (gender && search)
-      handleSearchCharacter(`${BASE_URL}?gender=${gender}&${nameParams}`);
-
-    if (gender && statusSearch && search)
-      handleSearchCharacter(
-        `${BASE_URL}?gender=${gender}&${statusParams}&${nameParams}`,
-      );
+    debouncedGenderFilter(gender);
   };
 
   const handleStatusFilter = (status: Status) => {
-    if (!genderSearch && !search)
-      handleSearchCharacter(`${BASE_URL}?status=${status}`);
+    const debouncedStatusFilter = debounce((status: Status) => {
+      handleSearchCharacter(buildQuery(search, genderSearch, status));
+    }, 300);
 
-    if (status && genderSearch)
-      handleSearchCharacter(`${BASE_URL}?status=${status}&${genderParams}`);
-
-    if (status && search)
-      handleSearchCharacter(`${BASE_URL}?status=${status}&${nameParams}`);
-
-    if (status && search && genderSearch)
-      handleSearchCharacter(
-        `${BASE_URL}?status=${status}&${nameParams}&${genderParams}`,
-      );
+    debouncedStatusFilter(status);
   };
 
   const reset = () => {
@@ -110,7 +97,7 @@ const Characters = () => {
 
           <Input
             type="text"
-            placeholder="Enter the charachter name"
+            placeholder="Enter the character name"
             className="bg-background/80"
             value={search}
             onChange={(e) => handleInputChange(e.target.value)}

@@ -30,3 +30,17 @@ export const formatEpisode = (episodeCode: string) => {
 
   return `Season ${number(season)} Episode ${number(episode)}`;
 };
+
+export const debounce = <T extends (...args: any[]) => void>(
+  func: T,
+  timeout = 700,
+): ((...args: Parameters<T>) => void) => {
+  let timer: NodeJS.Timeout;
+
+  return (...args: Parameters<T>) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(null, args);
+    }, timeout);
+  };
+};
